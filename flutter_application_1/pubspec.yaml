@@ -1,0 +1,33 @@
+name: flutter_application_1
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=3.2.6 <4.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  get: 4.6.6
+  flutter: 
+    sdk: flutter
+
+dev_dependencies: 
+  flutter_lints: ^2.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+
+  assets : 
+  - assets/images/1.png
+  - assets/images/Rectangle10.png
+  - assets/images/calendar-range.png
+  - assets/images/home.png
+  - assets/images/plus-square.png
+  - assets/images/search.png
+  - assets/images/user.png
+  - assets/images/google.png
+  - assets/images/lock.png
+  - assets/images/mail.png
+
