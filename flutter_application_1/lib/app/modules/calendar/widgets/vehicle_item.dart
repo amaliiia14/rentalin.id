@@ -7,6 +7,7 @@ class VehicleItemWidget extends StatelessWidget {
   final String plateNumber;
   final String status;
   final String renterName;
+  final double price;
 
   const VehicleItemWidget({
     required this.imageUrl,
@@ -15,6 +16,7 @@ class VehicleItemWidget extends StatelessWidget {
     required this.plateNumber,
     required this.status,
     required this.renterName,
+    required this.price,
   });
 
   @override
@@ -53,10 +55,10 @@ class VehicleItemWidget extends StatelessWidget {
                 Text(plateNumber, style: const TextStyle(fontSize: 8, color: Color(0xFFB5B5B5))),
                 const SizedBox(height: 20),
                 RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     children: [
-                      TextSpan(text: 'Rp 150.000', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF2567E8))),
-                      TextSpan(text: '/Day', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF94A3B8))),
+                      TextSpan(text: 'Rp. ${price.toString()}', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF2567E8))),
+                      const TextSpan(text: '/Day', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF94A3B8))),
                     ],
                   ),
                 ),
@@ -66,8 +68,17 @@ class VehicleItemWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(status, style: TextStyle(fontSize: 8, color: status.contains('Rent') ? const Color(0xFFFF3B30) : const Color(0xFFFF9500))),
-              Text(renterName, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Color(0xFF3D3D3D))),
+              Text(
+                status,
+                style: TextStyle(
+                  fontSize: 8,
+                  color: status.contains('On Rent') ? const Color(0xFFFF3B30) : const Color(0xFFFF9500),
+                ),
+              ),
+              Text(
+                renterName.isNotEmpty ? renterName : 'Available',
+                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Color(0xFF3D3D3D)),
+              ),
               const SizedBox(height: 36),
               const Text('...', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF2567E8))),
             ],

@@ -30,7 +30,7 @@ class DetailBookingScreen extends StatelessWidget {
           ),
         ),
         title: Align(
-          alignment: Alignment.centerRight, // Align title to the right
+          alignment: Alignment.centerRight, 
           child: const Text(
             'Detail Booking',
             style: TextStyle(

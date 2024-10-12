@@ -21,16 +21,16 @@ class HistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8.0),  // Margin antar kartu
+      margin: EdgeInsets.symmetric(vertical: 8.0),  
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
         side: BorderSide(
-          color: Colors.blue.withOpacity(0.3),  // Warna border
+          color: Colors.grey,  
           width: 1.0,
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),  // Padding dalam kartu
+        padding: const EdgeInsets.all(16.0),  
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -56,7 +56,7 @@ class HistoryCard extends StatelessWidget {
 
   Widget _buildDetailRow(String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),  // Jarak antar row
+      padding: const EdgeInsets.symmetric(vertical: 4.0), 
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

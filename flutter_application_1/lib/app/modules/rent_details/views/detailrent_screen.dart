@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_application_1/app/modules/rent_details/widgets/rent_details.dart';
 import 'package:flutter_application_1/app/modules/rent_details/widgets/renter_details.dart';
-import 'package:flutter_application_1/app/modules/rent_details/widgets/date_time.dart';
-import 'package:flutter_application_1/app/modules/rent_details/widgets/address_payment.dart';
 import 'package:flutter_application_1/app/modules/rent_details/controllers/detailrent_controller.dart';
 
 class DetailRentScreen extends StatelessWidget {
@@ -50,13 +48,10 @@ class DetailRentScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(height: 10),
-                    RentDetailsWidget(),
+                    RentDetail(),
                     SizedBox(height: 10),
-                    RenterDetailsWidget(),
+                    RenterDetail(),
                     SizedBox(height: 10),
-                    DateTimeDetailsWidget(),
-                    SizedBox(height: 10),
-                    AddressPayment(),
                   ],
                 ),
               ),

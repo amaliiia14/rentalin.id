@@ -14,21 +14,21 @@ class VehicleList extends StatelessWidget {
       status: 'On Booking',
       owner: 'Krisna Bimantoro',
       price: 150000,
-      imageUrl: 'assets/images/Rectangle10.png', 
+      imageUrl: 'assets/images/Rectangle10.png',
     ),
     Vehicle(
       name: 'Nmax 2024',
       status: 'On Booking',
       owner: 'Krisna Bimantoro',
       price: 150000,
-      imageUrl: 'assets/images/Rectangle10.png', 
+      imageUrl: 'assets/images/Rectangle10.png',
     ),
     Vehicle(
       name: 'Nmax 2024',
       status: 'On Booking',
       owner: 'Krisna Bimantoro',
       price: 150000,
-      imageUrl: 'assets/images/Rectangle10.png', 
+      imageUrl: 'assets/images/Rectangle10.png',
     ),
   ];
 
@@ -36,7 +36,7 @@ class VehicleList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: vehicles.length,
       itemBuilder: (context, index) {
         return VehicleCard(vehicle: vehicles[index]);
@@ -74,16 +74,27 @@ class VehicleCard extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            Image.asset(vehicle.imageUrl, width: 80, height: 80), // Ganti dengan asset yang sesuai
+            // Container to manage image size and add border radius
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0), // Clip the image to the border radius
+              child: Container(
+                width: 80,
+                height: 80,
+                child: Image.asset(
+                  vehicle.imageUrl,
+                  fit: BoxFit.cover, // Fit the image within the container
+                ),
+              ),
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(vehicle.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  Text(vehicle.status, style: TextStyle(color: Colors.blue)),
+                  Text(vehicle.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text(vehicle.status, style: const TextStyle(color: Colors.blue)),
                   Text('By ${vehicle.owner}'),
-                  Text('Rp ${vehicle.price}/Day', style: TextStyle(color: Colors.black54)),
+                  Text('Rp ${vehicle.price}/Day', style: const TextStyle(color: Colors.black54)),
                 ],
               ),
             ),

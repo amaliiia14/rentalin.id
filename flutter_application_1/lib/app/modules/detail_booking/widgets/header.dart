@@ -6,9 +6,9 @@ class Header extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start, // Align to start
+        mainAxisAlignment: MainAxisAlignment.start, 
         children: [
-          const SizedBox(width: 12), // Optional spacing, can be adjusted or removed
+          const SizedBox(width: 12), 
         ],
       ),
     );

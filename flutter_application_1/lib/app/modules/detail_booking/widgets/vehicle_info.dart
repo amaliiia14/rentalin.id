@@ -14,15 +14,15 @@ class VehicleInfo extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
               'assets/images/Rectangle10.png',
-              width: screenWidth * 0.3,
-              height: screenWidth * 0.3,
+              width: screenWidth * 0.4,
+              height: screenWidth * 0.4,
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(width: 16), // Removed const from here
+          SizedBox(width: 16), 
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(13), // Removed const from here
+              padding: EdgeInsets.all(13), 
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
@@ -59,11 +59,11 @@ class VehicleInfo extends StatelessWidget {
                       fontSize: 10,
                     ),
                   ),
-                  SizedBox(height: 8), // Removed const from here
+                  SizedBox(height: 8), 
                   RichText(
                     text: TextSpan(
                       style: TextStyle(
-                        fontSize: 18, // Default style for all TextSpans
+                        fontSize: 18, 
                       ),
                       children: [
                         TextSpan(
@@ -77,7 +77,7 @@ class VehicleInfo extends StatelessWidget {
                           text: '/Day',
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
-                            color: Colors.grey, // Gray color for "/Day"
+                            color: Colors.grey, 
                           ),
                         ),
                       ],

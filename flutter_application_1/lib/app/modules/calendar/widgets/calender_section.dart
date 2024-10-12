@@ -18,6 +18,8 @@ class CalendarSection extends StatelessWidget {
               _buildCalendarDay('19', 'WED', controller.selectedDate.value == 19),
               _buildCalendarDay('20', 'THU', controller.selectedDate.value == 20),
               _buildCalendarDay('21', 'FRI', controller.selectedDate.value == 21),
+              _buildCalendarDay('22', 'SAT', controller.selectedDate.value == 22),
+              _buildCalendarDay('23', 'SUN', controller.selectedDate.value == 23),
             ],
           ),
         );
