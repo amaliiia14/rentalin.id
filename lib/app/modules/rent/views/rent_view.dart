@@ -26,7 +26,7 @@ class RentView extends GetView<RentController> {
           nameMenu: 'Rent Motorcycle',
         ),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
             Row(
@@ -59,7 +59,7 @@ class motorP extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(8),
-          image: DecorationImage(
+          image: const DecorationImage(
             image: AssetImage("assets/img/img1.jpg"),
             fit: BoxFit.fill,
           )),
@@ -73,8 +73,8 @@ class motorI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10),
-      margin: EdgeInsets.all(10),
+      padding: const EdgeInsets.only(left: 10),
+      margin: const EdgeInsets.all(10),
       height: 128,
       width: 200,
       decoration: BoxDecoration(
@@ -82,7 +82,7 @@ class motorI extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             8,
           )),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -116,8 +116,8 @@ class Info1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.fromLTRB(13, 21, 14, 21),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.fromLTRB(13, 21, 14, 21),
       width: 344,
       height: 480,
       decoration: BoxDecoration(

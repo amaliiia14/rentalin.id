@@ -18,7 +18,7 @@ class AppBarComponents extends StatelessWidget {
 
         alignment: Alignment.center,
         // color: tdWhite,
-        padding: EdgeInsets.fromLTRB(10, 10, 18, 10),
+        padding: const EdgeInsets.fromLTRB(10, 10, 18, 10),
         decoration: const BoxDecoration(
             color: tdWhite,
             borderRadius: BorderRadius.all(Radius.circular(100))),
@@ -44,7 +44,7 @@ class AppBarComponents extends StatelessWidget {
             Text(
               nameMenu,
               textAlign: TextAlign.end,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: tdBlue,
               ),

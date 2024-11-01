@@ -57,9 +57,9 @@ class DetailManageMotorcycleView extends StatelessWidget {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
-                              "http://10.0.2.2:4300/" + dataLoad.fileName),
+                              "http://10.0.2.2:4300/${dataLoad.fileName}"),
                           fit: BoxFit.cover),
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
+                      borderRadius: const BorderRadius.all(Radius.circular(8))),
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -69,7 +69,7 @@ class DetailManageMotorcycleView extends StatelessWidget {
                       borderRadius: const BorderRadius.all(Radius.circular(8))),
                   width: 345,
                   height: 217,
-                  margin: EdgeInsets.only(top: 10),
+                  margin: const EdgeInsets.only(top: 10),
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                   child: Row(
@@ -107,7 +107,7 @@ class DetailManageMotorcycleView extends StatelessWidget {
                           Text(dataLoad.motorPlat),
                           Text(
                             dataLoad.pricePerDay.toString(),
-                            style: TextStyle(color: tdgreen),
+                            style: const TextStyle(color: tdgreen),
                           ),
                         ],
                       )
@@ -116,7 +116,7 @@ class DetailManageMotorcycleView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 220,
             ),
             Row(
@@ -140,13 +140,13 @@ class DetailManageMotorcycleView extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.red,
                       backgroundColor: Colors.white, // Text color
-                      side: BorderSide(color: Colors.red), // Border color
+                      side: const BorderSide(color: Colors.red), // Border color
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Delete',
                       style: TextStyle(
                         color: Colors.red,
@@ -173,7 +173,7 @@ class DetailManageMotorcycleView extends StatelessWidget {
                             BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Update',
                       style: TextStyle(
                         color: Colors.white,
@@ -198,20 +198,20 @@ Future<bool?> _showDeleteDialog(BuildContext context) async {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Hapus Motor'),
-        content: Text('Apakah Anda yakin ingin menghapus Motor ini?'),
+        title: const Text('Hapus Motor'),
+        content: const Text('Apakah Anda yakin ingin menghapus Motor ini?'),
         actions: <Widget>[
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(false); // Kembali dengan false
             },
-            child: Text('Batal'),
+            child: const Text('Batal'),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(true); // Kembali dengan true
             },
-            child: Text('Hapus'),
+            child: const Text('Hapus'),
           ),
         ],
       );

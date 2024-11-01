@@ -12,6 +12,8 @@ import 'rent_view.dart';
 import 'rent3_view.dart';
 
 class Rent4View extends GetView<RentController> {
+  const Rent4View({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +26,7 @@ class Rent4View extends GetView<RentController> {
         automaticallyImplyLeading: false,
         title: const AppBarComponents(nameMenu: 'Rent Motorcycle',),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
             Row(
@@ -60,8 +62,8 @@ class detRent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
-      padding: EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 20),
+      margin: const EdgeInsets.all(5),
+      padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 20),
       height: 639,
       width: 344,
       decoration: BoxDecoration(
@@ -78,7 +80,7 @@ class detRent extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(8))),
             width: 314,
             height: 200,
-            margin: EdgeInsets.only(top: 5 ),
+            margin: const EdgeInsets.only(top: 5 ),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,7 +118,7 @@ class detRent extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
 
           Container( 
             decoration: BoxDecoration(
@@ -126,7 +128,7 @@ class detRent extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(8))),
             width: 314,
             height: 181,
-            margin: EdgeInsets.only(top: 5 ),
+            margin: const EdgeInsets.only(top: 5 ),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -180,7 +182,7 @@ class detRent extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
 
           Container( 
             decoration: BoxDecoration(
@@ -190,7 +192,7 @@ class detRent extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(8))),
             width: 314,
             height: 181,
-            margin: EdgeInsets.only(top: 5 ),
+            margin: const EdgeInsets.only(top: 5 ),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -288,10 +290,10 @@ class BtnBook extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         onPressed: () {
-          Get.to(HomeView());
+          Get.to(const HomeView());
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xffFF9500),
+          backgroundColor: const Color(0xffFF9500),
           foregroundColor: tdWhite,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -316,10 +318,10 @@ class BtnRent extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         onPressed: () {
-          Get.to(HomeView());
+          Get.to(const HomeView());
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xff34C759),
+          backgroundColor: const Color(0xff34C759),
           foregroundColor: tdWhite,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

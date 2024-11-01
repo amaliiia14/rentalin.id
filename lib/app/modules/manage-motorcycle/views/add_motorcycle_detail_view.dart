@@ -11,6 +11,8 @@ import '../models/motorcycle.dart';
 
 class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  AddMotorcycleDetailView({super.key});
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => AddMotorcycleController());
@@ -51,7 +53,7 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                   borderRadius: const BorderRadius.all(Radius.circular(8))),
               width: 345,
               height: 217,
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,7 +109,7 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
                   labelText: "Price/Day",
                   hintText: "Rp. 150.000",
@@ -118,7 +120,7 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                     }
                   }),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -137,13 +139,13 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: tdBlue,
                       backgroundColor: Colors.white, // Text color
-                      side: BorderSide(color: tdBlue), // Border color
+                      side: const BorderSide(color: tdBlue), // Border color
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Go Back',
                       style: TextStyle(
                         color: Colors.blue,
@@ -179,7 +181,7 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                             BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Add New',
                       style: TextStyle(
                         color: Colors.white,

@@ -76,7 +76,7 @@ class ManageMotorcycleController extends GetxController {
   Future<void> fetchArticles() async {
     try {
       isLoading.value = true;
-      final response = await http.get(Uri.parse('${_baseUrl}$_category'));
+      final response = await http.get(Uri.parse('$_baseUrl$_category'));
       print(response);
 
       if (response.statusCode == 200) {

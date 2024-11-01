@@ -12,13 +12,13 @@ class CardListOnRent   extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(RentDetail());
+        Get.to(const RentDetail());
       },
       child: Container(
         width: 344,
         height: 95,
-        margin: EdgeInsets.only(top: 5),
-        padding: EdgeInsets.fromLTRB(5, 5, 15, 5),
+        margin: const EdgeInsets.only(top: 5),
+        padding: const EdgeInsets.fromLTRB(5, 5, 15, 5),
         decoration: BoxDecoration(
             color: tdWhite,
             boxShadow: [
@@ -26,10 +26,10 @@ class CardListOnRent   extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.5), // Shadow color
                 spreadRadius: -3, // How much the shadow spreads
                 blurRadius: 6, // How blurry the shadow is
-                offset: Offset(0, 2),
+                offset: const Offset(0, 2),
               ),
             ],
-            borderRadius: BorderRadius.all(Radius.circular(8))),
+            borderRadius: const BorderRadius.all(Radius.circular(8))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -45,7 +45,7 @@ class CardListOnRent   extends StatelessWidget {
                       borderRadius:
                           BorderRadius.all(Radius.circular(8))),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 12,
                 ),
                 const Column(

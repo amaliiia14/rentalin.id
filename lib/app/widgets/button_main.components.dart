@@ -24,7 +24,7 @@ class ButtonMainComponents extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10))),
           child: Text(
             buttonName,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
         ));
   }

@@ -121,14 +121,14 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
                       })
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ButtonMainComponents(  buttonName: "Add New Motorcycle", nextPage: () {
                         Get.to(AddMotorcycleView());
                       }),
                    
-                  SizedBox(
+                  const SizedBox(
                     height: 14,
                   )
                 ]);
@@ -157,7 +157,7 @@ class FilterComponent extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(4))),
         child: Text(
           fillText,
-          style: TextStyle(color: tdBlue, fontWeight: FontWeight.w600),
+          style: const TextStyle(color: tdBlue, fontWeight: FontWeight.w600),
         ),
       ),
     );

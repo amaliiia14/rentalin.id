@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
-import 'package:rentalin_id/app/modules/home/views/home_view.dart';
 import 'package:rentalin_id/app/modules/login/views/login_view.dart';
-import 'package:rentalin_id/app/modules/notification/views/notification_view.dart';
 // import 'package:rentalin_id/app/modules/search/controllers/search_controller.dart';
-import 'package:rentalin_id/app/modules/search/views/search_view.dart';
 // import 'package:rentalin_id/app/modules/home/views/home_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_user_view.dart';
 import 'package:rentalin_id/app/widgets/google_button.components.dart';

@@ -29,7 +29,7 @@ class SignupUserView extends GetView<SignupController> {
         backgroundColor: tdBg,
         leading: IconButton(
           onPressed: () {
-            Get.to(SignupView());
+            Get.to(const SignupView());
           },
           icon: Padding(
             padding: const EdgeInsets.only(left: 6),
@@ -82,7 +82,7 @@ class SignupUserView extends GetView<SignupController> {
                         backgroundColor: tdWhite,
                         foregroundColor: tdWhite,
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(color: tdBlue),
+                          side: const BorderSide(color: tdBlue),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),

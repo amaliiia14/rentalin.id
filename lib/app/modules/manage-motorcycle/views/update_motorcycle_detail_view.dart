@@ -8,6 +8,8 @@ import 'package:rentalin_id/app/widgets/input_text.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
 class UpdateMotorcycleDetailView extends StatelessWidget {
+  const UpdateMotorcycleDetailView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +47,7 @@ class UpdateMotorcycleDetailView extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(8))),
               width: 345,
               height: 217,
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,7 +97,7 @@ class UpdateMotorcycleDetailView extends StatelessWidget {
                 hintText: "Rp. 150.000",
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -114,13 +116,13 @@ class UpdateMotorcycleDetailView extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: tdBlue,
                       backgroundColor: Colors.white, // Text color
-                      side: BorderSide(color: tdBlue), // Border color
+                      side: const BorderSide(color: tdBlue), // Border color
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Go Back',
                       style: TextStyle(
                         color: Colors.blue,
@@ -146,7 +148,7 @@ class UpdateMotorcycleDetailView extends StatelessWidget {
                             BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Save',
                       style: TextStyle(
                         color: Colors.white,

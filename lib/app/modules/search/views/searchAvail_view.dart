@@ -15,7 +15,7 @@ class SearchAvailView extends GetView<SearchingController>{
     return Scaffold(
     backgroundColor: tdBg,
       body: ListView(
-        children: [
+        children: const [
           SizedBox(
             height: 30,
           ),
@@ -65,8 +65,8 @@ class ScrOpAvail extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () { Get.to(const SearchView()); },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xffC7DAFF),
-                    foregroundColor: Color(0xff1966FF),
+                    backgroundColor: const Color(0xffC7DAFF),
+                    foregroundColor: const Color(0xff1966FF),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -77,7 +77,7 @@ class ScrOpAvail extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               SizedBox(
@@ -98,7 +98,7 @@ class ScrOpAvail extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
                SizedBox(
@@ -107,8 +107,8 @@ class ScrOpAvail extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () { Get.to(const SearchBookedView());},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xffC7DAFF),
-                    foregroundColor: Color(0xff1966FF),
+                    backgroundColor: const Color(0xffC7DAFF),
+                    foregroundColor: const Color(0xff1966FF),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -119,7 +119,7 @@ class ScrOpAvail extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
                SizedBox(
@@ -128,8 +128,8 @@ class ScrOpAvail extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {Get.to(const SearchRentView()); },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xffC7DAFF),
-                    foregroundColor: Color(0xff1966FF),
+                    backgroundColor: const Color(0xffC7DAFF),
+                    foregroundColor: const Color(0xff1966FF),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

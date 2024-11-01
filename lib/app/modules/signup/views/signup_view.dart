@@ -26,11 +26,11 @@ class SignupView extends GetView<SignupController> {
                 child: Image.asset("assets/icon/arrow-left.png"),
               )),
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 23, right: 23),
+        body: const SingleChildScrollView(
+          padding: EdgeInsets.only(left: 23, right: 23),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

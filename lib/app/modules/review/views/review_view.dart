@@ -41,14 +41,14 @@ class ReviewView extends GetView<ReviewController> {
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                   width: 16,
                 ),
                 Container(
                   width: 200,
                   height: 128,
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   decoration: const BoxDecoration(
                       color: tdWhite,
                       borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -96,7 +96,7 @@ class ReviewView extends GetView<ReviewController> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -107,12 +107,12 @@ class ReviewView extends GetView<ReviewController> {
                       width: 70,
                       height: 70,
                       child: IconButton(
-                          onPressed: () {Get.to(HomeView());},
+                          onPressed: () {Get.to(const HomeView());},
                           icon: Image.asset("assets/icon/star-notfill.png"))),
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 343),
+              padding: const EdgeInsets.only(top: 343),
               child:
                   ButtonMainComponents(buttonName: "Finished", nextPage: () {}),
             )

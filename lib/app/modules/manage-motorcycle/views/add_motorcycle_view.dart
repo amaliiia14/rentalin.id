@@ -9,6 +9,8 @@ import 'package:rentalin_id/app/widgets/button_main.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
 class AddMotorcycleView extends GetView<AddMotorcycleController> {
+  const AddMotorcycleView({super.key});
+
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => AddMotorcycleController());
@@ -49,7 +51,7 @@ class AddMotorcycleView extends GetView<AddMotorcycleController> {
                         backgroundColor: tdWhite,
                         foregroundColor: tdWhite,
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(color: tdBlue),
+                          side: const BorderSide(color: tdBlue),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -65,7 +67,7 @@ class AddMotorcycleView extends GetView<AddMotorcycleController> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
                 labelText: "Merk Motor",
                 hintText: "Honda",
@@ -74,7 +76,7 @@ class AddMotorcycleView extends GetView<AddMotorcycleController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
                 labelText: "Motor Name",
                 hintText: "PCX",
@@ -83,7 +85,7 @@ class AddMotorcycleView extends GetView<AddMotorcycleController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
                 labelText: "Type Motor",
                 hintText: "Matic",
@@ -92,7 +94,7 @@ class AddMotorcycleView extends GetView<AddMotorcycleController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
                 labelText: "Plat Motor",
                 hintText: "KH 1213 WH",
@@ -101,7 +103,7 @@ class AddMotorcycleView extends GetView<AddMotorcycleController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 100),
+              padding: const EdgeInsets.only(top: 100),
               child: ButtonMainComponents(
                   buttonName: "Next",
                   nextPage: () {

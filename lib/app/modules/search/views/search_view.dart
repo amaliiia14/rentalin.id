@@ -52,7 +52,7 @@ class SearchView extends GetView<SearchingController> {
               CardRent(),
             ],
           ),
-          child: ChildBottomBar(),
+          child: const ChildBottomBar(),
         )
         // bottomNavigationBar: BottomFloatBar()
         );
@@ -69,19 +69,19 @@ class Scr extends StatelessWidget {
       height: 50,
       width: 50,
       decoration: BoxDecoration(
-        color: Color(0xff1966FF),
+        color: const Color(0xff1966FF),
         borderRadius: BorderRadius.circular(30),
       ),
       child: ElevatedButton(
           onPressed: () {},
           style: ElevatedButton.styleFrom(
-            shape: CircleBorder(),
-            padding: EdgeInsets.all(0),
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(0),
             alignment: Alignment.center,
             backgroundColor: tdBlue,
             foregroundColor: tdWhite,
           ),
-          child: Icon(
+          child: const Icon(
             Icons.search,
           )),
     );
@@ -98,7 +98,7 @@ class ScrBar extends StatelessWidget {
       width: 284,
       // padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Color(0xffffffff),
+        color: const Color(0xffffffff),
         borderRadius: BorderRadius.circular(20),
         // border: Border.all(color: Color(0xff1966FF))
       ),
@@ -158,7 +158,7 @@ class ScrOpAll extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         SizedBox(
@@ -169,8 +169,8 @@ class ScrOpAll extends StatelessWidget {
               Get.to(const SearchAvailView());
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xffC7DAFF),
-              foregroundColor: Color(0xff1966FF),
+              backgroundColor: const Color(0xffC7DAFF),
+              foregroundColor: const Color(0xff1966FF),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -181,7 +181,7 @@ class ScrOpAll extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         SizedBox(
@@ -192,8 +192,8 @@ class ScrOpAll extends StatelessWidget {
               Get.to(const SearchBookedView());
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xffC7DAFF),
-              foregroundColor: Color(0xff1966FF),
+              backgroundColor: const Color(0xffC7DAFF),
+              foregroundColor: const Color(0xff1966FF),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -204,7 +204,7 @@ class ScrOpAll extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         SizedBox(
@@ -215,8 +215,8 @@ class ScrOpAll extends StatelessWidget {
               Get.to(const SearchRentView());
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xffC7DAFF),
-              foregroundColor: Color(0xff1966FF),
+              backgroundColor: const Color(0xffC7DAFF),
+              foregroundColor: const Color(0xff1966FF),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -237,12 +237,12 @@ class CardBooked extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Column(
+      child: const Column(
         children: [CardListOnBook()],
       ),
     );
@@ -255,12 +255,12 @@ class CardAvailable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Column(
+      child: const Column(
         children: [CardListMotor()],
       ),
     );
@@ -273,12 +273,12 @@ class CardRent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Column(
+      child: const Column(
         children: [CardListOnRent()],
       ),
     );

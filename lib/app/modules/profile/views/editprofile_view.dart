@@ -8,6 +8,8 @@ import 'package:rentalin_id/app/widgets/button_main.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
 class EditprofileView extends StatelessWidget {
+  const EditprofileView({super.key});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

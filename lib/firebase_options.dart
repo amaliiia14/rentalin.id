@@ -41,49 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA7hKNu3_KY0s1kp5-ipMcJhnd1G94CMGU',
-    appId: '1:351000962286:web:1b8e04cce489b68286ffff',
-    messagingSenderId: '351000962286',
-    projectId: 'rentalinid-7883c',
-    authDomain: 'rentalinid-7883c.firebaseapp.com',
-    storageBucket: 'rentalinid-7883c.appspot.com',
-    measurementId: 'G-DSJG6H40EB',
+    apiKey: 'AIzaSyBAOk1c2gE0DMMdM1ptCOrZugJhmYayeFY',
+    appId: '1:803294236782:web:976981c83cee103976967f',
+    messagingSenderId: '803294236782',
+    projectId: 'rentalinid-f4c71',
+    authDomain: 'rentalinid-f4c71.firebaseapp.com',
+    storageBucket: 'rentalinid-f4c71.appspot.com',
+    measurementId: 'G-1CKTPY9VP3',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC673HCCERUuLWn8ovMNeLe1gtdr_kdN9U',
-    appId: '1:351000962286:android:88b6bd88a183041586ffff',
-    messagingSenderId: '351000962286',
-    projectId: 'rentalinid-7883c',
-    storageBucket: 'rentalinid-7883c.appspot.com',
+    apiKey: 'AIzaSyDZfRE8Y2XUOuv8TLHYq3iM_aKAbvxinns',
+    appId: '1:803294236782:android:80c2fd750af72de376967f',
+    messagingSenderId: '803294236782',
+    projectId: 'rentalinid-f4c71',
+    storageBucket: 'rentalinid-f4c71.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCV06wBSZKcL335zVzFeFYLzsf3lTzw6zk',
-    appId: '1:351000962286:ios:7538717f1c1d4ac486ffff',
-    messagingSenderId: '351000962286',
-    projectId: 'rentalinid-7883c',
-    storageBucket: 'rentalinid-7883c.appspot.com',
+    apiKey: 'AIzaSyC5u8YWG0qrV0UbsKrrxN1gkZRRONMa8yg',
+    appId: '1:803294236782:ios:9760779ef2e1971176967f',
+    messagingSenderId: '803294236782',
+    projectId: 'rentalinid-f4c71',
+    storageBucket: 'rentalinid-f4c71.appspot.com',
     iosBundleId: 'com.example.rentalinId',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCV06wBSZKcL335zVzFeFYLzsf3lTzw6zk',
-    appId: '1:351000962286:ios:7538717f1c1d4ac486ffff',
-    messagingSenderId: '351000962286',
-    projectId: 'rentalinid-7883c',
-    storageBucket: 'rentalinid-7883c.appspot.com',
+    apiKey: 'AIzaSyC5u8YWG0qrV0UbsKrrxN1gkZRRONMa8yg',
+    appId: '1:803294236782:ios:9760779ef2e1971176967f',
+    messagingSenderId: '803294236782',
+    projectId: 'rentalinid-f4c71',
+    storageBucket: 'rentalinid-f4c71.appspot.com',
     iosBundleId: 'com.example.rentalinId',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyA7hKNu3_KY0s1kp5-ipMcJhnd1G94CMGU',
-    appId: '1:351000962286:web:8bf00065e3da364f86ffff',
-    messagingSenderId: '351000962286',
-    projectId: 'rentalinid-7883c',
-    authDomain: 'rentalinid-7883c.firebaseapp.com',
-    storageBucket: 'rentalinid-7883c.appspot.com',
-    measurementId: 'G-SYSNGQ9RVV',
+    apiKey: 'AIzaSyBAOk1c2gE0DMMdM1ptCOrZugJhmYayeFY',
+    appId: '1:803294236782:web:3eafc933853463ea76967f',
+    messagingSenderId: '803294236782',
+    projectId: 'rentalinid-f4c71',
+    authDomain: 'rentalinid-f4c71.firebaseapp.com',
+    storageBucket: 'rentalinid-f4c71.appspot.com',
+    measurementId: 'G-VVBWH6NYN1',
   );
 
 }

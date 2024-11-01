@@ -25,8 +25,8 @@ class CardManageMotor extends StatelessWidget {
       child: Container(
         width: 344,
         height: 95,
-        margin: EdgeInsets.only(top: 15),
-        padding: EdgeInsets.fromLTRB(5, 5, 15, 5),
+        margin: const EdgeInsets.only(top: 15),
+        padding: const EdgeInsets.fromLTRB(5, 5, 15, 5),
         decoration: BoxDecoration(
             color: tdWhite,
             boxShadow: [
@@ -34,10 +34,10 @@ class CardManageMotor extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.5), // Shadow color
                 spreadRadius: -3, // How much the shadow spreads
                 blurRadius: 6, // How blurry the shadow is
-                offset: Offset(0, 2),
+                offset: const Offset(0, 2),
               ),
             ],
-            borderRadius: BorderRadius.all(Radius.circular(8))),
+            borderRadius: const BorderRadius.all(Radius.circular(8))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -49,11 +49,11 @@ class CardManageMotor extends StatelessWidget {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
-                              "http://10.0.2.2:4300/" + dataLoad.fileName),
+                              "http://10.0.2.2:4300/${dataLoad.fileName}"),
                           fit: BoxFit.cover),
                       borderRadius: const BorderRadius.all(Radius.circular(8))),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 12,
                 ),
                 Column(
@@ -67,11 +67,11 @@ class CardManageMotor extends StatelessWidget {
                     Text(
                       dataLoad.motorName,
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       dataLoad.motorPlat,
-                      style: TextStyle(fontSize: 11, color: tdGrey),
+                      style: const TextStyle(fontSize: 11, color: tdGrey),
                     ),
                     const SizedBox(
                       height: 10,
@@ -80,10 +80,10 @@ class CardManageMotor extends StatelessWidget {
                       children: [
                         Text(
                           dataLoad.pricePerDay.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: tdBlue, fontWeight: FontWeight.w700),
                         ),
-                        Text(
+                        const Text(
                           "/Day",
                           style: TextStyle(color: tdGrey),
                         )

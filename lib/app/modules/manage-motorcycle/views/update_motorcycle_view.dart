@@ -10,6 +10,8 @@ import 'package:rentalin_id/app/widgets/input_text.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
 class UpdateMotorcycleView extends StatelessWidget {
+  const UpdateMotorcycleView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +51,7 @@ class UpdateMotorcycleView extends StatelessWidget {
                         backgroundColor: tdWhite,
                         foregroundColor: tdWhite,
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(color: tdBlue),
+                          side: const BorderSide(color: tdBlue),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -93,7 +95,7 @@ class UpdateMotorcycleView extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 100),
+              padding: const EdgeInsets.only(top: 100),
               child: ButtonMainComponents(
                   buttonName: "Next",
                   nextPage: () {

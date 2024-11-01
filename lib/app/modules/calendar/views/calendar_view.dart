@@ -79,7 +79,7 @@ class CalendarView extends GetView<CalendarController> {
           body: (BuildContext context, ScrollController controller) {
             return Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 18,
                 ),
                 Row(
@@ -101,9 +101,9 @@ class CalendarView extends GetView<CalendarController> {
                         day: '21', weekday: 'FRI', isSelected: false),
                   ],
                 ),
-                CardListOnBook(),
-                CardListOnBook(),
-                CardListOnBook(),
+                const CardListOnBook(),
+                const CardListOnBook(),
+                const CardListOnBook(),
               ],
             );
           },
@@ -139,7 +139,7 @@ Widget _buildDateCard({
             color: isSelected ? tdBlue : tdGrey, // Blue if selected
           ),
         ),
-        SizedBox(height: 4), // Spacing between day and weekday
+        const SizedBox(height: 4), // Spacing between day and weekday
         Text(
           weekday,
           style: TextStyle(

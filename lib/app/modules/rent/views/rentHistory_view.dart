@@ -24,7 +24,7 @@ class Renthistory extends GetView<RentController>{
         automaticallyImplyLeading: false,
         title: const AppBarComponents(nameMenu: 'History Rent',),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child:  Column(
           children: [
             Row(

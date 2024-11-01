@@ -25,7 +25,7 @@ class BookingView extends GetView<BookingControllers>{
         automaticallyImplyLeading: false,
         title: const AppBarComponents(nameMenu: 'Detail Booking',),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child:  Column(
           children: [
             Row(
@@ -68,7 +68,7 @@ class BtnRent2 extends StatelessWidget {
           Get.to(const RentDetail());
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xff34C759),
+          backgroundColor: const Color(0xff34C759),
           foregroundColor: tdWhite,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -121,10 +121,10 @@ class BtnUpBook extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         onPressed: () {
-          Get.to(RentView());
+          Get.to(const RentView());
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xffFF9500),
+          backgroundColor: const Color(0xffFF9500),
           foregroundColor: tdWhite,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

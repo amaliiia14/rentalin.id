@@ -55,7 +55,7 @@ class _ButtonGoogleState extends State<ButtonGoogle> {
               )),
           label: Text(
             widget.labelText,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
           ),
         ));
   }

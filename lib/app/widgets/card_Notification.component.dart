@@ -16,7 +16,7 @@ class CardNotification extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(8))),
       width: 345,
       height: 217,
-      margin: EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 10),
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

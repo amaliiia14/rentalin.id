@@ -26,7 +26,7 @@ class RentDetail extends GetView<RentController>{
         automaticallyImplyLeading: false,
         title: const AppBarComponents(nameMenu: 'Detail Rent',),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child:  Column(
           children: [
             Row(
@@ -67,7 +67,7 @@ class BtnFinish extends StatelessWidget {
       height: 52,
       child: ElevatedButton(
         onPressed: () {
-          Get.to(ReviewView());
+          Get.to(const ReviewView());
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: tdBlue,
@@ -123,11 +123,11 @@ class BtnUpRent extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         onPressed: () {
-          Get.to(RentView());
+          Get.to(const RentView());
           // Get.to(RentDetail());
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xffFF9500),
+          backgroundColor: const Color(0xffFF9500),
           foregroundColor: tdWhite,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -138,6 +138,6 @@ class BtnUpRent extends StatelessWidget {
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
       ),
-    );;
+    );
   }
 }

@@ -114,7 +114,7 @@ class ProfileView extends GetView<ProfileController> {
                             Row(
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(top: 15),
+                                  margin: const EdgeInsets.only(top: 15),
                                   width: 50,
                                   height: 50,
                                   padding: const EdgeInsets.all(10),

@@ -80,7 +80,7 @@ class LoginView extends GetView<LoginController> {
                     ),
                   ],
                 ),
-                Text(
+                const Text(
                   "Forgot Password",
                   style: TextStyle(fontWeight: FontWeight.bold, color: tdBlue),
                 )
@@ -93,8 +93,8 @@ class LoginView extends GetView<LoginController> {
                         Get.offAndToNamed(Routes.HOME);
                       }))
             ]),
-            Padding(
-                padding: const EdgeInsets.only(top: 10),
+            const Padding(
+                padding: EdgeInsets.only(top: 10),
                 child: ButtonGoogle(
                   iconPath: "assets/icon/google.png",
                   labelText: "Sign in with Google",
@@ -114,7 +114,7 @@ class LoginView extends GetView<LoginController> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(SignupView());
+                      Get.to(const SignupView());
                     },
                     child: const Text(
                       "Sign Up",

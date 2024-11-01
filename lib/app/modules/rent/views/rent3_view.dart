@@ -26,7 +26,7 @@ class Rent3View extends GetView<RentController>{
         automaticallyImplyLeading: false,
         title: const AppBarComponents(nameMenu: 'Rent Motorcycle',),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
             Row(
@@ -59,8 +59,8 @@ class Info3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.fromLTRB(13, 21, 14, 21),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.fromLTRB(13, 21, 14, 21),
       width: 344,
       height: 400  ,
       decoration: BoxDecoration(
@@ -68,7 +68,7 @@ class Info3 extends StatelessWidget {
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Column(
+      child: const Column(
         children: [
           InputTextNoIcon(
             labelText: 'Deliver Address', 
