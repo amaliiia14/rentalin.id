@@ -11,7 +11,7 @@ import 'rent_view.dart';
 import 'rent2_view.dart';
 import 'rent4_view.dart';
 
-class Rent3View extends GetView<RentController>{
+class Rent3View extends GetView<RentController> {
   const Rent3View({super.key});
 
   @override
@@ -24,7 +24,9 @@ class Rent3View extends GetView<RentController>{
         toolbarHeight: 100,
         titleSpacing: 0,
         automaticallyImplyLeading: false,
-        title: const AppBarComponents(nameMenu: 'Rent Motorcycle',),
+        title: const AppBarComponents(
+          nameMenu: 'Rent Motorcycle',
+        ),
       ),
       body: const SingleChildScrollView(
         child: Column(
@@ -58,37 +60,44 @@ class Info3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<RentController>();
     return Container(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.fromLTRB(13, 21, 14, 21),
       width: 344,
-      height: 400  ,
+      height: 400,
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: const Column(
+      child: Column(
         children: [
           InputTextNoIcon(
-            labelText: 'Deliver Address', 
-            hintText: 'Enter your Delivery Address'
+              controller: controller.deliveryController,
+              labelText: 'Deliver Address',
+              hintText: 'Enter your Delivery Address'),
+          const SizedBox(
+            height: 10,
           ),
-          SizedBox(height: 10,),
           InputTextNoIcon(
-            labelText: 'Pickup Address', 
-            hintText: 'Enter your Pickup Address'
+              controller: controller.pickupController,
+              labelText: 'Pickup Address',
+              hintText: 'Enter your Pickup Address'),
+          const SizedBox(
+            height: 10,
           ),
-          SizedBox(height: 10,),
           InputTextNoIcon(
-            labelText: 'Method Payment', 
-            hintText: 'Select your method payment'
+              controller: controller.methodPaymentController,
+              labelText: 'Method Payment',
+              hintText: 'Select your method payment'),
+          const SizedBox(
+            height: 10,
           ),
-          SizedBox(height: 10,),
-           InputTextNoIcon(
-            labelText: 'Total Payment', 
-            hintText: 'Rp.300.000'
-          ),
+          InputTextNoIcon(
+              controller: controller.totalPaymentController,
+              labelText: 'Total Payment',
+              hintText: 'Rp.300.000'),
         ],
       ),
     );
@@ -128,11 +137,13 @@ class BtnN3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<RentController>();
     return SizedBox(
       width: 163,
       height: 50,
       child: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
+          await controller.saveToFirebase();
           Get.to(Rent4View());
         },
         style: ElevatedButton.styleFrom(

@@ -15,6 +15,8 @@ class RentDetail extends GetView<RentController>{
 
   @override
   Widget build(BuildContext context) {
+    String docId = controller.rentalDocId.value;
+    
    return Scaffold(
       backgroundColor: tdBg,
       appBar: AppBar(
@@ -26,29 +28,29 @@ class RentDetail extends GetView<RentController>{
         automaticallyImplyLeading: false,
         title: const AppBarComponents(nameMenu: 'Detail Rent',),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child:  Column(
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 motorP(),
                 motorI(),
               ],
             ),
-            detRent(),
-            SizedBox(height: 10,),
-            BtnFinish(),
-            SizedBox(height: 10,),
+            const detRent(),
+            const SizedBox(height: 10,),
+            const BtnFinish(),
+            const SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BtnDelRent(),
-                SizedBox(width: 10,),
-                BtnUpRent(),
+                BtnDelRent(docId: docId),
+                const SizedBox(width: 10,),
+                const BtnUpRent(),
               ],
             ),
-            SizedBox(height: 20,)
+            const SizedBox(height: 20,)
           ],
         ),
       )
@@ -62,11 +64,13 @@ class BtnFinish extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final RentController rentController = Get.find<RentController>();
     return SizedBox(
       width: 344,
       height: 52,
       child: ElevatedButton(
         onPressed: () {
+          rentController.addNotification();
           Get.to(const ReviewView());
         },
         style: ElevatedButton.styleFrom(
@@ -86,16 +90,23 @@ class BtnFinish extends StatelessWidget {
 }
 
 class BtnDelRent extends StatelessWidget {
-  const BtnDelRent({super.key});
+  final String docId; 
+  BtnDelRent({Key? key, required this.docId}) : super(key: key); 
 
   @override
   Widget build(BuildContext context) {
+    final RentController rentController = Get.find<RentController>();
+
     return SizedBox(
       width: 163,
       height: 50,
       child: ElevatedButton(
-        onPressed: () {
-          Get.to(const Renthistory());
+        onPressed: () async {
+          print("Deleting document with ID: $docId"); 
+
+          await rentController.deleteRental(docId); 
+
+          Get.to(const Renthistory());  
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: tdWhite,
@@ -113,6 +124,7 @@ class BtnDelRent extends StatelessWidget {
   }
 }
 
+
 class BtnUpRent extends StatelessWidget {
   const BtnUpRent({super.key});
 
@@ -124,7 +136,6 @@ class BtnUpRent extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           Get.to(const RentView());
-          // Get.to(RentDetail());
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xffFF9500),

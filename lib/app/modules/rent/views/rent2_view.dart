@@ -4,19 +4,16 @@ import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/rent/views/rent3_view.dart';
 import 'package:rentalin_id/app/modules/rent/views/rent_view.dart';
 
-
 import '../../../widgets/app_bar.components.dart';
 import '../../../widgets/input_text.components.dart';
 import '../../../widgets/input_text_noicon.components.dart';
 import '../controllers/rent_controller.dart';
 
-
-class Rent2View extends GetView<RentController>{
+class Rent2View extends GetView<RentController> {
   const Rent2View({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         scrolledUnderElevation: 0,
         elevation: 0,
@@ -24,7 +21,9 @@ class Rent2View extends GetView<RentController>{
         toolbarHeight: 100,
         titleSpacing: 0,
         automaticallyImplyLeading: false,
-        title: const AppBarComponents(nameMenu: 'Rent Motorcycle',),
+        title: const AppBarComponents(
+          nameMenu: 'Rent Motorcycle',
+        ),
       ),
       body: const SingleChildScrollView(
         child: Column(
@@ -58,37 +57,44 @@ class Info2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<RentController>();
     return Container(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.fromLTRB(13, 21, 14, 21),
       width: 344,
-      height: 400  ,
+      height: 400,
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: const Column(
+      child: Column(
         children: [
           InputTextNoIcon(
-            labelText: 'Date Start Rent', 
-            hintText: '09 November 2024'
+              controller: controller.datestartController,
+              labelText: 'Date Start Rent',
+              hintText: '09 November 2024'),
+          const SizedBox(
+            height: 10,
           ),
-          SizedBox(height: 10,),
           InputTextNoIcon(
-            labelText: 'End Date Rent', 
-            hintText: '12 November 2024'
+              controller: controller.enddateController,
+              labelText: 'End Date Rent',
+              hintText: '12 November 2024'),
+          const SizedBox(
+            height: 10,
           ),
-          SizedBox(height: 10,),
           InputTextNoIcon(
-            labelText: 'Clock Start Rent', 
-            hintText: '12:00'
+              controller: controller.clockstartController,
+              labelText: 'Clock Start Rent',
+              hintText: '12:00'),
+          const SizedBox(
+            height: 10,
           ),
-          SizedBox(height: 10,),
           InputTextNoIcon(
-            labelText: 'Clock End Rent', 
-            hintText: '17:00'
-          ),
+              controller: controller.clockendController,
+              labelText: 'Clock End Rent',
+              hintText: '17:00'),
         ],
       ),
     );
@@ -128,6 +134,7 @@ class BtnN2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<RentController>();
     return SizedBox(
       width: 163,
       height: 50,

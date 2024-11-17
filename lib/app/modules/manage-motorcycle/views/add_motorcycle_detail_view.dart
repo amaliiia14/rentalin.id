@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/camera_motorcycle_controller.dart';
+import 'package:rentalin_id/app/widgets/VideoPlayerWidget.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
@@ -13,6 +16,7 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   AddMotorcycleDetailView({super.key});
+
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => AddMotorcycleController());
@@ -20,37 +24,51 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
 
     return Scaffold(
       appBar: AppBar(
-          // surfaceTintColor: tdGrey,
-          scrolledUnderElevation: 0,
-          // leadingWidth: 344,
-          elevation: 0,
-          backgroundColor: tdBg,
-          toolbarHeight: 80,
-          titleSpacing: 0,
-          automaticallyImplyLeading: false,
-          title: const AppBarComponents(
-            nameMenu: 'Add New Motorcycle',
-          )),
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        backgroundColor: tdBg,
+        toolbarHeight: 80,
+        titleSpacing: 0,
+        automaticallyImplyLeading: false,
+        title: const AppBarComponents(
+          nameMenu: 'Add New Motorcycle',
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 23, right: 23),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: 344,
-              height: 148,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/img/img1.jpg"),
-                      fit: BoxFit.cover),
-                  borderRadius: BorderRadius.all(Radius.circular(8))),
-            ),
+            Obx(() {
+              final controller = Get.find<CameraController>();
+              return Container(
+                width: 344,
+                height: 148,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                child: controller.selectedImagePath.value.isNotEmpty
+                    ? Image.file(
+                        File(controller.selectedImagePath.value),
+                        fit: BoxFit.cover,
+                      )
+                    : controller.selectedVideoPath.value.isNotEmpty
+                        ? VideoPlayerWidget(
+                            videoPath: controller.selectedVideoPath.value,
+                          )
+                        : Image.asset(
+                            "assets/img/img1.jpg",
+                            fit: BoxFit.cover,
+                          ),
+              );
+            }),
             Container(
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.rectangle,
-                  border: Border.all(color: tdGrey),
-                  borderRadius: const BorderRadius.all(Radius.circular(8))),
+                color: Colors.white,
+                shape: BoxShape.rectangle,
+                border: Border.all(color: tdGrey),
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+              ),
               width: 345,
               height: 217,
               margin: const EdgeInsets.only(top: 10),
@@ -65,7 +83,9 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                       Text(
                         "Detail Motor",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
                       Text("Merk Motor"),
                       Text("Motor Name"),
@@ -77,15 +97,13 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Text(
-                        "",
-                      ),
+                      const Text(""),
                       Text(motorcycle.merkMotor),
                       Text(motorcycle.motorName),
                       Text(motorcycle.typeMotor),
                       Text(motorcycle.platMotor),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -98,7 +116,6 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                     () => Checkbox(
                       value: controller.motorcycle.value.isRecommended,
                       onChanged: (value) {
-                        // Update the controller's value when the checkbox is toggled
                         controller.motorcycle.value.isRecommended =
                             value ?? false;
                       },
@@ -111,38 +128,35 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
-                  labelText: "Price/Day",
-                  hintText: "Rp. 150.000",
-                  onChanged: (value) {
-                    double? price = double.tryParse(value);
-                    if (price != null) {
-                      controller.motorcycle.value.pricePerDay = price;
-                    }
-                  }),
+                labelText: "Price/Day",
+                hintText: "Rp. 150.000",
+                onChanged: (value) {
+                  double? price = double.tryParse(value);
+                  if (price != null) {
+                    controller.motorcycle.value.pricePerDay = price;
+                  }
+                },
+              ),
             ),
             const SizedBox(
               height: 20,
             ),
             Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.spaceEvenly, // Align buttons evenly
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // "Go Back" button with fixed size
                 SizedBox(
                   width: 163,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
                       Get.back();
-                      // Define what happens when "Go Back" is pressed
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: tdBlue,
-                      backgroundColor: Colors.white, // Text color
-                      side: const BorderSide(color: tdBlue), // Border color
+                      backgroundColor: Colors.white,
+                      side: const BorderSide(color: tdBlue),
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(8), // Rounded corners
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                     child: const Text(
@@ -155,7 +169,6 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                     ),
                   ),
                 ),
-                // "Add New" button with fixed size
                 SizedBox(
                   width: 163,
                   height: 50,
@@ -169,16 +182,14 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                         'Plat Motor': motorcycle.platMotor,
                         'Price/Day': motorcycle.pricePerDay,
                         'Recommendation': motorcycle.isRecommended,
-                        'Type Motor': motorcycle.typeMotor
+                        'Type Motor': motorcycle.typeMotor,
                       });
-                      // Define what happens when "Add New" is pressed
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: tdgreen, // Text color
+                      backgroundColor: tdgreen,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(8), // Rounded corners
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                     child: const Text(
@@ -192,11 +203,10 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
-    // TODO: implement build
   }
 }

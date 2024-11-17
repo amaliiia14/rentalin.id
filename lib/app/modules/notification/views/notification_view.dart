@@ -32,15 +32,13 @@ class NotificationView extends GetView<NotificationController> {
 }
 
 class cardNotif extends StatelessWidget {
-  const cardNotif({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topCenter,
       child: InkWell(
-        onTap: (){Get.to(const SignupView());},
-        child: const CardNotification(),
+        onTap: (){Get.to(SignupView());},
+        child: CardNotification(),
       ),
     );
   }

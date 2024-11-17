@@ -115,6 +115,7 @@ class Info1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<RentController>();
     return Container(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.fromLTRB(13, 21, 14, 21),
@@ -122,42 +123,38 @@ class Info1 extends StatelessWidget {
       height: 480,
       decoration: BoxDecoration(
         color: Colors.white,
-        shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: const Column(
+      child: Column(
         children: [
           InputTextNoIcon(
-            labelText: 'Full Name', 
-            hintText: 'Enter your full name'
+            controller: controller.fullNameController,
+            labelText: 'Full Name',
+            hintText: 'Enter your full name',
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           InputTextNoIcon(
-            labelText: 'Hometown', 
-            hintText: 'Enter your city of origin'
+            controller: controller.hometownController,
+            labelText: 'Hometown',
+            hintText: 'Enter your city of origin',
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           InputTextNoIcon(
-            labelText: 'No Handphone 1', 
-            hintText: 'Enter your No Handphone 1'
+            controller: controller.phone1Controller,
+            labelText: 'No Handphone 1',
+            hintText: 'Enter your No Handphone 1',
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           InputTextNoIcon(
-            labelText: 'No Handphone 2', 
-            hintText: 'Enter your No Handphone 2'
+            controller: controller.phone2Controller,
+            labelText: 'No Handphone 2',
+            hintText: 'Enter your No Handphone 2',
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           InputTextNoIcon(
-            labelText: 'Helm', 
-            hintText: 'Enter your helm'
+            controller: controller.helmController,
+            labelText: 'Helm',
+            hintText: 'Enter your helm',
           ),
         ],
       ),
@@ -169,6 +166,7 @@ class BtnN extends StatelessWidget {
   const BtnN({super.key});
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<RentController>();
     return SizedBox(
       width: 344,
       height: 52,
