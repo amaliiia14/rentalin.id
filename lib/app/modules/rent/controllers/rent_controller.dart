@@ -1,6 +1,24 @@
+import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
+class MapController extends GetxController {
+  var selectedLocation = Rx<LatLng?>(null);
+  var selectedAddress = Rx<String?>("Alamat belum ditemukan");
+
+  void updateLocation(LatLng location) async {
+    selectedLocation.value = location;
+    List<Placemark> placemarks = await placemarkFromCoordinates(location.latitude, location.longitude);
+    if (placemarks.isNotEmpty) {
+      Placemark placemark = placemarks.first;
+      selectedAddress.value = "${placemark.name}, ${placemark.locality}, ${placemark.country}";
+    } else {
+      selectedAddress.value = "Alamat tidak ditemukan";
+    }
+  }  
+}
 
 class RentController extends GetxController {
   final fullNameController = TextEditingController();
@@ -33,6 +51,9 @@ class RentController extends GetxController {
   var totalPayment = ''.obs;
 
   var rentalHistory = <Map<String, dynamic>>[].obs;
+
+  // Access to the CobaController to manage location-related logic
+  final MapController mapController = Get.put(MapController());
 
   @override
   void onInit() {
@@ -84,7 +105,6 @@ class RentController extends GetxController {
         'totalPayment': totalPaymentController.text,
       });
 
-      // Update the observable variables to reflect the saved data
       rentalDocId.value = docRef.id;
       fullName.value = fullNameController.text;
       hometown.value = hometownController.text;
@@ -103,8 +123,6 @@ class RentController extends GetxController {
       fetchRentalHistory();
 
       Get.snackbar('Success', 'Data has been saved!');
-      
-      // Call addNotification after saving data successfully
       addNotification();
     } catch (e) {
       Get.snackbar('Error', 'Failed to save data');
@@ -120,7 +138,6 @@ class RentController extends GetxController {
       };
 
       await FirebaseFirestore.instance.collection('notifications').add(notificationData);
-
       print("Notification added successfully.");
     } catch (e) {
       print("Failed to add notification: $e");
@@ -128,17 +145,16 @@ class RentController extends GetxController {
   }
 
   Future<void> deleteRental(String docId) async {
-  try {
-    print("Attempting to delete rental with ID: $docId");
-    await FirebaseFirestore.instance.collection('rentals').doc(docId).delete();
-    fetchRentalHistory();
-    Get.snackbar('Success', 'Rental has been deleted!');
-  } catch (e) {
-    Get.snackbar('Error', 'Failed to delete rental');
-    print("Failed to delete rental: $e");
+    try {
+      print("Attempting to delete rental with ID: $docId");
+      await FirebaseFirestore.instance.collection('rentals').doc(docId).delete();
+      fetchRentalHistory();
+      Get.snackbar('Success', 'Rental has been deleted!');
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to delete rental');
+      print("Failed to delete rental: $e");
+    }
   }
-}
-
 
   @override
   void onClose() {

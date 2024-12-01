@@ -41,6 +41,7 @@ void main() async {
     });
 
     Get.put(RentController());
+    Get.put(MapController());
 
     runApp(const MyApp());
   } catch (e) {

@@ -3,7 +3,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/modules/rent/controllers/rent_controller.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
-
+import 'package:rentalin_id/app/widgets/input_with_map.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../data/constant/color.dart';
 import '../../../widgets/app_bar.components.dart';
 import '../../../widgets/input_text.components.dart';
@@ -60,7 +61,9 @@ class Info3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<RentController>();
+    final rentController = Get.find<RentController>();
+    final mapController = Get.find<MapController>(); // Accessing MapController
+
     return Container(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.fromLTRB(13, 21, 14, 21),
@@ -73,31 +76,43 @@ class Info3 extends StatelessWidget {
       ),
       child: Column(
         children: [
-          InputTextNoIcon(
-              controller: controller.deliveryController,
-              labelText: 'Deliver Address',
-              hintText: 'Enter your Delivery Address'),
+          InputWithMap(
+            controller: rentController.deliveryController,
+            labelText: 'Deliver Address',
+            hintText: 'Enter your Delivery Address',
+            onLocationSelected: (LatLng location) {
+              mapController.updateLocation(location); 
+              rentController.deliveryController.text = mapController.selectedAddress.value ?? "Alamat belum ditemukan";
+            },
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          InputWithMap(
+            controller: rentController.pickupController,
+            labelText: 'Pickup Address',
+            hintText: 'Enter your Pickup Address',
+            onLocationSelected: (LatLng location) {
+              mapController.updateLocation(location); 
+              rentController.pickupController.text = mapController.selectedAddress.value ?? "Alamat belum ditemukan";
+            },
+          ),
           const SizedBox(
             height: 10,
           ),
           InputTextNoIcon(
-              controller: controller.pickupController,
-              labelText: 'Pickup Address',
-              hintText: 'Enter your Pickup Address'),
+            controller: rentController.methodPaymentController,
+            labelText: 'Method Payment',
+            hintText: 'Select your method payment',
+          ),
           const SizedBox(
             height: 10,
           ),
           InputTextNoIcon(
-              controller: controller.methodPaymentController,
-              labelText: 'Method Payment',
-              hintText: 'Select your method payment'),
-          const SizedBox(
-            height: 10,
+            controller: rentController.totalPaymentController,
+            labelText: 'Total Payment',
+            hintText: 'Rp.300.000',
           ),
-          InputTextNoIcon(
-              controller: controller.totalPaymentController,
-              labelText: 'Total Payment',
-              hintText: 'Rp.300.000'),
         ],
       ),
     );
