@@ -1,8 +1,9 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/camera_motorcycle_controller.dart';
 import 'package:rentalin_id/app/widgets/VideoPlayerWidget.dart';
@@ -14,8 +15,42 @@ import '../models/motorcycle.dart';
 
 class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
+  final box = GetStorage();
   AddMotorcycleDetailView({super.key});
+
+  Future<bool> _isConnected() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    return connectivityResult != ConnectivityResult.none;
+  }
+
+  Future<void> _saveOffline(Map<String, dynamic> data) async {
+    List<dynamic> offlineData = box.read<List<dynamic>>('offlineMotorcycles') ?? [];
+    offlineData.add(data);
+    await box.write('offlineMotorcycles', offlineData);
+    Get.snackbar('Offline', 'Data saved locally. It will sync when online.',
+        snackPosition: SnackPosition.BOTTOM);
+  }
+
+  Future<void> _syncData() async {
+    List<dynamic> offlineData = box.read<List<dynamic>>('offlineMotorcycles') ?? [];
+    if (offlineData.isNotEmpty) {
+      for (var data in offlineData) {
+        await firestore.collection("Manage MotorCycle").add(data);
+      }
+      await box.remove('offlineMotorcycles');
+      Get.snackbar('Online', 'Offline data synced to Firestore.',
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
+  Future<String> _uploadImageToFirebase(File selectedImage) async {
+    // Implement your Firebase image upload logic here and return the image URL
+    // Example: 
+    // final storageRef = FirebaseStorage.instance.ref().child('images/${selectedImage.path.split('/').last}');
+    // await storageRef.putFile(selectedImage);
+    // return await storageRef.getDownloadURL();
+    return "https://example.com/image-url"; // Replace with actual URL
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -174,16 +209,32 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () async {
-                      CollectionReference addMotor =
-                          firestore.collection("Manage MotorCycle");
-                      await addMotor.add({
+                      Map<String, dynamic> data = {
                         'Merk Motor': motorcycle.merkMotor,
                         'Motor Name': motorcycle.motorName,
                         'Plat Motor': motorcycle.platMotor,
                         'Price/Day': motorcycle.pricePerDay,
                         'Recommendation': motorcycle.isRecommended,
                         'Type Motor': motorcycle.typeMotor,
-                      });
+                      };
+
+                      final controller = Get.find<CameraController>();
+                      if (controller.selectedImagePath.value.isNotEmpty) {
+                        File selectedImage = File(controller.selectedImagePath.value);
+                        String imageUrl = await _uploadImageToFirebase(selectedImage);
+                        
+                        data['Image URL'] = imageUrl;
+                      }
+
+                      if (await _isConnected()) {
+                        await firestore.collection("Manage MotorCycle").add(data);
+                        await _syncData(); 
+                      } else {
+                        await _saveOffline(data);
+                      }
+
+                      Get.snackbar('Success', 'Motorcycle added successfully!',
+                          snackPosition: SnackPosition.BOTTOM);
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
