@@ -17,6 +17,7 @@ class Rent3View extends GetView<RentController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => RentController());
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
@@ -64,6 +65,9 @@ class Info3 extends StatelessWidget {
     final rentController = Get.find<RentController>();
     final mapController = Get.find<MapController>(); // Accessing MapController
 
+    final arguments = Get.arguments;
+    print(arguments?['address']);
+
     return Container(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.fromLTRB(13, 21, 14, 21),
@@ -79,11 +83,14 @@ class Info3 extends StatelessWidget {
           InputWithMap(
             controller: rentController.deliveryController,
             labelText: 'Deliver Address',
-            hintText: 'Enter your Delivery Address',
+            hintText: arguments['address'],
             onLocationSelected: (LatLng location) {
-              mapController.updateLocation(location); 
-              rentController.deliveryController.text = mapController.selectedAddress.value ?? "Alamat belum ditemukan";
+              mapController.updateLocation(location);
+              rentController.deliveryController.text =
+                  mapController.selectedAddress.value ??
+                      "Alamat belum ditemukan";
             },
+            onChanged: (value) => arguments['address'] = value,
           ),
           const SizedBox(
             height: 10,
@@ -93,8 +100,10 @@ class Info3 extends StatelessWidget {
             labelText: 'Pickup Address',
             hintText: 'Enter your Pickup Address',
             onLocationSelected: (LatLng location) {
-              mapController.updateLocation(location); 
-              rentController.pickupController.text = mapController.selectedAddress.value ?? "Alamat belum ditemukan";
+              mapController.updateLocation(location);
+              rentController.pickupController.text =
+                  mapController.selectedAddress.value ??
+                      "Alamat belum ditemukan";
             },
           ),
           const SizedBox(

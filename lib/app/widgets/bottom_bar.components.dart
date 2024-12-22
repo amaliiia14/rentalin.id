@@ -20,7 +20,7 @@ class ChildBottomBar extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                Get.to(const HomeView());
+                Get.to(HomeView());
               },
               icon: Padding(
                 padding: const EdgeInsets.only(right: 20),
@@ -32,7 +32,7 @@ class ChildBottomBar extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {Get.to(const SearchView());},
+              onPressed: () {Get.to(SearchView());},
               icon: Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: Image.asset(
@@ -44,7 +44,7 @@ class ChildBottomBar extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                Get.to(const ManageMotorcycleView());
+                Get.to(ManageMotorcycleView());
               },
               icon: Padding(
                 padding: const EdgeInsets.only(right: 20),
@@ -57,7 +57,7 @@ class ChildBottomBar extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                Get.to(const CalendarView());
+                Get.to(CalendarView());
               },
               icon: Padding(
                 padding: const EdgeInsets.only(right: 20),
@@ -69,7 +69,7 @@ class ChildBottomBar extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {Get.to(const ProfileView());},
+              onPressed: () {Get.to(ProfileView());},
               icon: Padding(
                 padding: const EdgeInsets.only(right: 0),
                 child: Image.asset(

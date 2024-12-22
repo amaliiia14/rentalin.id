@@ -17,7 +17,7 @@ class MapController extends GetxController {
     } else {
       selectedAddress.value = "Alamat tidak ditemukan";
     }
-  }  
+  }
 }
 
 class RentController extends GetxController {

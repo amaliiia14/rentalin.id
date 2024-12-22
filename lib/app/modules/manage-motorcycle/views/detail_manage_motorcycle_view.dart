@@ -4,32 +4,68 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/data/models/motor.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/add_motorcyle_controller.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/models/motorcycle.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/views/manage_motorcycle_view.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/update_motorcycle_view.dart';
 import 'package:rentalin_id/app/modules/webview-page/views/webview_page_view.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 
 import '../controllers/manage_motorcycle_controller.dart';
 
-class DetailManageMotorcycleView extends StatelessWidget {
-  final Datum dataLoad;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final ManageMotorcycleController _controller =
-      Get.put(ManageMotorcycleController());
-  final String motorcycleId;
+class DetailManageMotorcycleView extends GetView<AddMotorcycleController> {
+  // final Datum dataLoad;
+  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // final ManageMotorcycleController _controller =
+  //     Get.put(ManageMotorcycleController());
+  // final String motorcycleId;
 
-  Stream<QuerySnapshot> _getTasks() {
-    return _firestore.collection('Manage Motorcycle').snapshots();
-  }
+  // Stream<QuerySnapshot> _getTasks() {
+  //   return _firestore.collection('Manage Motorcycle').snapshots();
+  // }
+  // final arguments = Get.arguments ?? {};
 
-  DetailManageMotorcycleView(
-      {super.key, required this.dataLoad, required this.motorcycleId});
+  // final motorcycleId = arguments['motorcycleId'] as String?;
+  // final merkMotor = Get.arguments['merkMotor'] as String?;
+  // final motorName = Get.arguments['motorName'] as String?;
+  // final platMotor = Get.arguments['platMotor'] as String?;
+  // final pricePerDay = Get.arguments['pricePerDay'] as double?;
+  // final recommendation = Get.arguments['recommendation'] as bool?;
+  // final typeMotor = Get.arguments['typeMotor'] as String?;
+
+  const DetailManageMotorcycleView({
+    super.key,
+  });
 
   String? get id => null;
 
   @override
   Widget build(BuildContext context) {
-    _controller.fetchMotorcycleDetails(motorcycleId);
-    var data = _controller.motorcycle;
+    // _controller.fetchMotorcycleDetails(motorcycleId);
+    // var data = _controller.motorcycle;
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    Get.lazyPut(() => AddMotorcycleController());
+    // final Motorcycle motorcycle = Get.arguments as Motorcycle;
+
+    final arguments = Get.arguments;
+
+    final String motorcycleId = arguments['motorcycleId'] ?? 'Unknown ID';
+    final String merkMotor = arguments['merkMotor'] ?? 'Unknown Merk';
+    final String motorName = arguments['motorName'] ?? 'Unknown Name';
+    final String platMotor = arguments['platMotor'] ?? 'Unknown Plat';
+    final double pricePerDay = arguments['pricePerDay'] ?? 0.0;
+    final bool recommendation = arguments['recommendation'] ?? false;
+    final String typeMotor = arguments['typeMotor'] ?? 'Unknown Type';
+
+    controller.motorcycle.value.motorcycleId = motorcycleId;
+    controller.motorcycle.value.merkMotor = merkMotor;
+    controller.motorcycle.value.motorName = motorName;
+    controller.motorcycle.value.platMotor = platMotor;
+    controller.motorcycle.value.pricePerDay = pricePerDay;
+    controller.motorcycle.value.isRecommended = recommendation;
+    controller.motorcycle.value.typeMotor = typeMotor;
+
+    print("cek ${controller.motorcycle.value.motorcycleId}");
     return Scaffold(
       appBar: AppBar(
           // surfaceTintColor: tdGrey,
@@ -54,12 +90,10 @@ class DetailManageMotorcycleView extends StatelessWidget {
                 Container(
                   width: 344,
                   height: 148,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(
-                              "http://10.0.2.2:4300/${dataLoad.fileName}"),
-                          fit: BoxFit.cover),
-                      borderRadius: const BorderRadius.all(Radius.circular(8))),
+                          image: AssetImage(""), fit: BoxFit.cover),
+                      borderRadius: BorderRadius.all(Radius.circular(8))),
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -75,23 +109,31 @@ class DetailManageMotorcycleView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
+                      const Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "Detail Motor",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           ),
-                          Text(data['Merk Motor'] ?? ''),
-                          Text(data['Motor Name'] ?? ''),
-                          Text(data['Type Motor'] ?? ''),
-                          Text(data['Plat Motor'] ?? ''),
+                          Text("Merk Motor"),
+                          Text("Motor Name"),
+                          Text("Type Motor"),
+                          const Text("Plat Motor"),
                           Text(
-                            data['Price'] ?? '',
-                            style: const TextStyle(color: tdgreen),
+                            "Price/Day",
+                            style: TextStyle(color: tdgreen),
                           ),
+                          // Text(data['Merk Motor'] ?? ''),
+                          // Text(data['Motor Name'] ?? ''),
+                          // Text(data['Type Motor'] ?? ''),
+                          // Text(data['Plat Motor'] ?? ''),
+                          // Text(
+                          //   data['Price'] ?? '',
+                          // style: const TextStyle(color: tdgreen),
+                          // ),
                         ],
                       ),
                       Column(
@@ -101,14 +143,22 @@ class DetailManageMotorcycleView extends StatelessWidget {
                           const Text(
                             "",
                           ),
-                          Text(dataLoad.motorType),
-                          Text(dataLoad.motorName),
-                          const Text("Matic"),
-                          Text(dataLoad.motorPlat),
+                          Text('$merkMotor'),
+                          Text('$motorName'),
+                          Text('$typeMotor'),
+                          Text('$platMotor'),
                           Text(
-                            dataLoad.pricePerDay.toString(),
+                            ('$pricePerDay'),
                             style: const TextStyle(color: tdgreen),
-                          ),
+                          )
+                          // Text(dataLoad.typeMotor),
+                          // Text(dataLoad.motorName),
+                          // const Text("Matic"),
+                          // Text(dataLoad.platMotor),
+                          // Text(
+                          //   dataLoad.pricePerDay.toString(),
+                          //   style: TextStyle(color: tdgreen),
+                          // ),
                         ],
                       )
                     ],
@@ -131,10 +181,13 @@ class DetailManageMotorcycleView extends StatelessWidget {
                     onPressed: () async {
                       bool? confirmDelete = await _showDeleteDialog(context);
                       if (confirmDelete == true) {
-                        await _firestore
-                            .collection('Manage Motorcycle')
-                            .doc(id)
+                        // print(motorcycleId),
+                        await firestore
+                            .collection('Manage MotorCycle')
+                            .doc(motorcycleId)
                             .delete();
+
+                        Get.to(ManageMotorcycleView());
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -162,7 +215,8 @@ class DetailManageMotorcycleView extends StatelessWidget {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.to(UpdateMotorcycleView());
+                      Get.to(UpdateMotorcycleView(),
+                          arguments: controller.motorcycle.value);
                       // Define what happens when "Add New" is pressed
                     },
                     style: ElevatedButton.styleFrom(

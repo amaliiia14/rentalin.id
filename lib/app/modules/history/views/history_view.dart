@@ -21,7 +21,7 @@ class HistoryView extends GetView<HistoryController> {
             titleSpacing: 0,
             automaticallyImplyLeading: false,
             title: const AppBarComponents(nameMenu: 'History',)),
-       
+
       body: const SingleChildScrollView(
         child: Text(
           'HistoryView is working',

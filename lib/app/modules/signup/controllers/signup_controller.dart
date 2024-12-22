@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:rentalin_id/app/modules/signup/models/users.dart';
 
 class SignupController extends GetxController {
   Future<void> checkPermissions() async {
@@ -13,6 +16,33 @@ class SignupController extends GetxController {
 
   var selectedImagePath = ''.obs; // Observable for image path
   var selectedImageSize = ''.obs; // Observable for image size
+
+  var users = Users(
+          usersId: '',
+          emailAddress: '',
+          fileName: '',
+          fullName: '',
+          nameRent: '',
+          password: '')
+      .obs;
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> registerUser() async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      Get.snackbar('Success', 'User registered successfully',
+          snackPosition: SnackPosition.BOTTOM);
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar('Error', e.message ?? 'An error occurred',
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  }
 
   // Future<XFile?> pickImage() async {
   //   final imagePicker = ImagePicker();
@@ -44,8 +74,20 @@ class SignupController extends GetxController {
   // }
 
   final count = 0.obs;
+  @override
+  void onInit() {
+    super.onInit();
+  }
 
+  @override
+  void onReady() {
+    super.onReady();
+  }
 
+  @override
+  void onClose() {
+    super.onClose();
+  }
 
   void increment() => count.value++;
 }

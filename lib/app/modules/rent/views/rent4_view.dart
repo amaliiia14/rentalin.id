@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/modules/Booking/views/booking_view.dart';
 import 'package:rentalin_id/app/modules/home/views/home_view.dart';
@@ -11,8 +12,6 @@ import 'rent_view.dart';
 import 'rent3_view.dart';
 
 class Rent4View extends GetView<RentController> {
-  const Rent4View({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +22,7 @@ class Rent4View extends GetView<RentController> {
         toolbarHeight: 100,
         titleSpacing: 0,
         automaticallyImplyLeading: false,
-        title: const AppBarComponents(nameMenu: 'Rent Motorcycle'),
+        title: const AppBarComponents(nameMenu: 'Rent Motorcycle',),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -35,19 +34,19 @@ class Rent4View extends GetView<RentController> {
                 motorI(),
               ],
             ),
-            const detRent(),
-            const SizedBox(height: 10),
-            const BtnBk3(),
-            const SizedBox(height: 10),
+            detRent(),
+            SizedBox(height: 10,),
+            BtnBk3(),
+            SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const BtnBook(),
-                const SizedBox(width: 10),
-                const BtnRent(),
+                BtnBook(),
+                SizedBox(width: 10,),
+                BtnRent(),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20,),
           ],
         ),
       ),
@@ -60,36 +59,34 @@ class detRent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<RentController>();
     return Container(
-      margin: const EdgeInsets.all(5),
-      padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 20),
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 20),
       height: 639,
       width: 344,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: tdWhite,
+       borderRadius: BorderRadius.circular(8),
+       color: tdWhite,
       ),
       child: Column(
         children: [
-          Container(
+          Container( 
             decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.rectangle,
-              border: Border.all(color: tdGrey),
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-            ),
+                color: Colors.white,
+                shape: BoxShape.rectangle,
+                border: Border.all(color: tdGrey),
+                borderRadius: const BorderRadius.all(Radius.circular(8))),
             width: 314,
             height: 200,
-            margin: const EdgeInsets.only(top: 5),
+            margin: EdgeInsets.only(top: 5 ),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       "Detail Renter's",
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -105,125 +102,143 @@ class detRent extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    const Text(""),
-                    Text(controller.fullName.value),
-                    Text(controller.hometown.value),
-                    Text(controller.phone1.value),
-                    Text(controller.phone2.value),
-                    Text(controller.helm.value),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.rectangle,
-              border: Border.all(color: tdGrey),
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-            ),
-            width: 314,
-            height: 181,
-            margin: const EdgeInsets.only(top: 5),
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Detail Days and Clock",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Start Date"),
-                    const SizedBox(width: 90),
-                    Text(controller.dateStart.value),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("End Date"),
-                    const SizedBox(width: 95),
-                    Text(controller.endDate.value),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Clock Start"),
-                    const SizedBox(width: 173),
-                    Text(controller.clockStart.value),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Clock End"),
-                    const SizedBox(width: 180),
-                    Text(controller.clockEnd.value),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.rectangle,
-              border: Border.all(color: tdGrey),
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-            ),
-            width: 314,
-            height: 181,
-            margin: const EdgeInsets.only(top: 5),
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Detail Address and Payment",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Delivery Address"),
-                    const SizedBox(width: 39),
-                    Text(controller.deliveryAddress.value),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Pickup Address"),
-                    const SizedBox(width: 46),
-                    Text(controller.pickupAddress.value),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Method Payment"),
-                    const SizedBox(width: 135),
-                    Text(controller.methodPayment.value),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Total Payment"),
-                    const SizedBox(width: 115),
                     Text(
-                      controller.totalPayment.value,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                      "",
                     ),
+                    Text("Krisna Bimantoro"),
+                    Text("+6281231231"),
+                    Text("+6281231231"),
+                    Text("KH 2021 WG"),
+                    Text("Cargloss 1"),
+                  ],
+                )
+              ],
+            ),
+          ),
+
+          SizedBox(height: 10,),
+
+          Container( 
+            decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.rectangle,
+                border: Border.all(color: tdGrey),
+                borderRadius: const BorderRadius.all(Radius.circular(8))),
+            width: 314,
+            height: 181,
+            margin: EdgeInsets.only(top: 5 ),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Detail Days and Clock",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("start Date"),
+                        SizedBox(width: 90,),
+                        Text("27 September 2024"),
+                      ],
+                    ),
+                    
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("End Date"),
+                        SizedBox(width: 95,),
+                        Text("29 September 2024"),
+                      ],
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Clock Start"),
+                        SizedBox(width: 173,),
+                        Text("13:00"),
+                      ],
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Clock End"),
+                        SizedBox(width: 180,),
+                        Text("17:00"),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(height: 10,),
+
+          Container( 
+            decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.rectangle,
+                border: Border.all(color: tdGrey),
+                borderRadius: const BorderRadius.all(Radius.circular(8))),
+            width: 314,
+            height: 181,
+            margin: EdgeInsets.only(top: 5 ),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Detail Address and Payment",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Delivery Address"),
+                        SizedBox(width: 39,),
+                        Text("Jln. Tlogomas, SPBU"),
+                      ],
+                    ),
+                    
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Pickup Address"),
+                        SizedBox(width: 46,),
+                        Text("Jln. Tlogomas, SPBU"),
+                      ],
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Method Payment"),
+                        SizedBox(width: 135,),
+                        Text("Tunai"),
+                      ],
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Total Payment"),
+                        SizedBox(width: 115,),
+                        Text("Rp. 300.000", 
+                      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                      ],
+                    ),  
                   ],
                 ),
               ],
@@ -268,17 +283,15 @@ class BtnBook extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<RentController>();
     return SizedBox(
       width: 163,
       height: 50,
       child: ElevatedButton(
-        onPressed: () async {
-          await controller.saveToFirebase();
-          Get.to(const HomeView());
+        onPressed: () {
+          Get.to(HomeView());
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xffFF9500),
+          backgroundColor: Color(0xffFF9500),
           foregroundColor: tdWhite,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -298,17 +311,15 @@ class BtnRent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<RentController>();
     return SizedBox(
       width: 163,
       height: 50,
       child: ElevatedButton(
-        onPressed: () async {
-          await controller.saveToFirebase();
-          Get.to(const HomeView());
+        onPressed: () {
+          Get.to(HomeView());
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xff34C759),
+          backgroundColor: Color(0xff34C759),
           foregroundColor: tdWhite,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

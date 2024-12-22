@@ -9,7 +9,7 @@ class WebviewPageView extends GetView<WebviewPageController> {
   const WebviewPageView({super.key});
   @override
   Widget build(BuildContext context) {
-       Get.put(WebviewPageController());
+      Get.put(WebviewPageController());
     return Scaffold(
         appBar: AppBar(
           title: const Text('WebviewPageView'),

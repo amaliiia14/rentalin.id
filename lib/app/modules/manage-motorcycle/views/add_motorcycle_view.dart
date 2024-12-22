@@ -1,34 +1,38 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/add_motorcyle_controller.dart';
-import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/camera_motorcycle_controller.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/add_motorcycle_detail_view.dart';
-import 'package:rentalin_id/app/widgets/VideoPlayerWidget.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/button_main.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
-class AddMotorcycleView extends GetView<AddMotorcycleController> {
-  const AddMotorcycleView({super.key});
+import '../../../widgets/videoPlayerWidget.dart';
+import '../controllers/camera_motorcycle_controller.dart';
 
+class AddMotorcycleView extends GetView<AddMotorcycleController> {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => AddMotorcycleController());
+    Get.lazyPut(()=>CameraController());
+     
     return Scaffold(
       appBar: AppBar(
-        scrolledUnderElevation: 0,
-        elevation: 0,
-        backgroundColor: tdBg,
-        toolbarHeight: 80,
-        titleSpacing: 0,
-        automaticallyImplyLeading: false,
-        title: const AppBarComponents(
-          nameMenu: 'Add New Motorcycle',
-        ),
-      ),
+          // surfaceTintColor: tdGrey,
+          scrolledUnderElevation: 0,
+          // leadingWidth: 344,
+          elevation: 0,
+          backgroundColor: tdBg,
+          toolbarHeight: 80,
+          titleSpacing: 0,
+          automaticallyImplyLeading: false,
+          title: const AppBarComponents(
+            nameMenu: 'Add New Motorcycle',
+          )),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 23, right: 23),
         child: Column(
@@ -125,59 +129,57 @@ class AddMotorcycleView extends GetView<AddMotorcycleController> {
                     }),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: InputTextNoIcon(
-                    labelText: "Merk Motor",
-                    hintText: "Honda",
-                    onChanged: (value) =>
-                        controller.motorcycle.value.merkMotor = value,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: InputTextNoIcon(
-                    labelText: "Motor Name",
-                    hintText: "PCX",
-                    onChanged: (value) =>
-                        controller.motorcycle.value.motorName = value,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: InputTextNoIcon(
-                    labelText: "Type Motor",
-                    hintText: "Matic",
-                    onChanged: (value) =>
-                        controller.motorcycle.value.typeMotor = value,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: InputTextNoIcon(
-                    labelText: "Plat Motor",
-                    hintText: "KH 1213 WH",
-                    onChanged: (value) =>
-                        controller.motorcycle.value.platMotor = value,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 100),
-                  child: ButtonMainComponents(
-                    buttonName: "Next",
-                    nextPage: () {
-                      Get.to(
-                        AddMotorcycleDetailView(),
-                        arguments: controller.motorcycle.value,
-                      );
-                    },
-                  ),
-                ),
               ],
             ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: InputTextNoIcon(
+                labelText: "Merk Motor",
+                hintText: "Honda",
+                onChanged: (value) =>
+                    controller.motorcycle.value.merkMotor = value,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: InputTextNoIcon(
+                labelText: "Motor Name",
+                hintText: "PCX",
+                onChanged: (value) =>
+                    controller.motorcycle.value.motorName = value,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: InputTextNoIcon(
+                labelText: "Type Motor",
+                hintText: "Matic",
+                onChanged: (value) => controller.motorcycle.value.typeMotor =
+                    value, // Bind input to model
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: InputTextNoIcon(
+                labelText: "Plat Motor",
+                hintText: "KH 1213 WH",
+                onChanged: (value) =>
+                    controller.motorcycle.value.platMotor = value,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 100),
+              child: ButtonMainComponents(
+                  buttonName: "Next",
+                  nextPage: () {
+                    Get.to(AddMotorcycleDetailView(),
+                        arguments: controller.motorcycle.value);
+                  }),
+            )
           ],
         ),
       ),
     );
+    // TODO: implement build
   }
 }

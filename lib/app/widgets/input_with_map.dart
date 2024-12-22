@@ -5,9 +5,12 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/rent/controllers/rent_controller.dart';
+import 'package:rentalin_id/app/modules/rent/views/rent3_view.dart';
+import 'package:rentalin_id/app/widgets/button_main.components.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MyMapScreen extends StatelessWidget {
-  final MapController _mapController = Get.put(MapController()); 
+  final MapController _mapController = Get.put(MapController());
   final RxString _address = ''.obs;
 
   @override
@@ -36,7 +39,8 @@ class MyMapScreen extends StatelessWidget {
                   }
 
                   Position position = snapshot.data!;
-                  LatLng initialPosition = LatLng(position.latitude, position.longitude);
+                  LatLng initialPosition =
+                      LatLng(position.latitude, position.longitude);
 
                   return Obx(() {
                     return GoogleMap(
@@ -54,7 +58,8 @@ class MyMapScreen extends StatelessWidget {
                           Marker(
                             markerId: const MarkerId('selected_location'),
                             position: _mapController.selectedLocation.value!,
-                            infoWindow: const InfoWindow(title: 'Titik Terpilih'),
+                            infoWindow:
+                                const InfoWindow(title: 'Titik Terpilih'),
                           ),
                       },
                     );
@@ -74,7 +79,7 @@ class MyMapScreen extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.fromLTRB(13, 21, 14, 21),
       width: 344,
-      height: 400,
+      // height: 400,
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.rectangle,
@@ -111,7 +116,7 @@ class MyMapScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10), 
+          const SizedBox(height: 10),
           const Text(
             'Alamat',
             style: TextStyle(
@@ -137,9 +142,32 @@ class MyMapScreen extends StatelessWidget {
               );
             }),
           ),
+          Padding(
+            padding: EdgeInsets.only(top: 100),
+            child: ButtonMainComponents(
+                buttonName: "Open Google maps", nextPage: () {
+                  _launchURL("https://www.google.com/maps?q=${_mapController.selectedLocation.value!.latitude},${_mapController.selectedLocation.value!.longitude}");
+                }),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 100),
+            child: ButtonMainComponents(
+                buttonName: "Next",
+                nextPage: () {
+                  Get.to(Rent3View(), arguments:{'address': _address.value});
+                }),
+          )
         ],
       ),
     );
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Future<Position> _getUserLocation() async {
@@ -159,7 +187,8 @@ class MyMapScreen extends StatelessWidget {
       }
     }
 
-    return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 
   Future<void> _updateAddress(LatLng location) async {
@@ -186,12 +215,13 @@ class InputWithMap extends StatelessWidget {
   final String labelText;
   final String hintText;
   final Function(LatLng) onLocationSelected;
-
+  final Function(String)? onChanged;
   const InputWithMap({
     required this.controller,
     required this.labelText,
     required this.hintText,
     required this.onLocationSelected,
+    this.onChanged,
     super.key,
   });
 
@@ -211,6 +241,7 @@ class InputWithMap extends StatelessWidget {
         TextField(
           controller: controller,
           cursorColor: tdSecBlue,
+          onChanged: onChanged,
           style: const TextStyle(color: tdBlue, fontSize: 16),
           decoration: InputDecoration(
             enabledBorder: const OutlineInputBorder(

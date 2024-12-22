@@ -50,7 +50,7 @@ class BookingView extends GetView<BookingControllers>{
           ],
         ),
       )
-     
+  
     );
   }
 }

@@ -23,10 +23,8 @@ class ButtonGoogle extends StatefulWidget {
 }
 
 class _ButtonGoogleState extends State<ButtonGoogle> {
-  // ValueNotifier userCredential = ValueNotifier('');
   ValueNotifier<UserCredential?> userCredential =
-      ValueNotifier(null); // Use UserCredential type
-
+      ValueNotifier(null); 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -55,7 +53,7 @@ class _ButtonGoogleState extends State<ButtonGoogle> {
               )),
           label: Text(
             widget.labelText,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
           ),
         ));
   }

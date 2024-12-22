@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/modules/signup/controllers/camera_controller.dart';
 import 'package:rentalin_id/app/modules/signup/controllers/signup_controller.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_password_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_view.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:rentalin_id/app/widgets/google_button.components.dart';
 import 'package:rentalin_id/app/widgets/input_text.components.dart';
-// import '../controllers/signup_controller.dart';
-import '../bindings/signup_binding.dart';
+
+
+import '../../../widgets/VideoPlayerWidget.dart';
 
 class SignupUserView extends GetView<SignupController> {
   const SignupUserView({super.key});
@@ -24,12 +26,15 @@ class SignupUserView extends GetView<SignupController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => SignupController());
+    Get.lazyPut(() => CameraSignupController());
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: tdBg,
         leading: IconButton(
           onPressed: () {
-            Get.to(const SignupView());
+            Get.to(SignupView());
           },
           icon: Padding(
             padding: const EdgeInsets.only(left: 6),
@@ -38,21 +43,17 @@ class SignupUserView extends GetView<SignupController> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(left: 23, right: 23),
+        padding: const EdgeInsets.symmetric(horizontal: 23),
         child: Column(
-// Set mainAxisSize to min to allow scrolling properly
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 0),
-              child: Text(
-                "Create Your Account",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: tdBlue,
-                ),
+            const Text(
+              "Create Your Account",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: tdBlue,
               ),
             ),
             const Padding(
@@ -74,83 +75,145 @@ class SignupUserView extends GetView<SignupController> {
                   ),
                 ),
                 SizedBox(
-                    width: 380,
-                    height: 100,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: tdWhite,
-                        foregroundColor: tdWhite,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(color: tdBlue),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                  width: double.infinity,
+                  height: 100,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final controller = Get.find<CameraSignupController>();
+                      await showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("Choose Action"),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ListTile(
+                                  leading: const Icon(Icons.photo_camera),
+                                  title: const Text("Take Photo"),
+                                  onTap: () async {
+                                    Navigator.of(context).pop();
+                                    await controller.pickImage(ImageSource.camera);
+                                  },
+                                ),
+                                ListTile(
+                                  leading: const Icon(Icons.image),
+                                  title: const Text("Pick from Gallery"),
+                                  onTap: () async {
+                                    Navigator.of(context).pop();
+                                    await controller.pickImage(ImageSource.gallery);
+                                  },
+                                ),
+                                ListTile(
+                                  leading: const Icon(Icons.videocam),
+                                  title: const Text("Take Video"),
+                                  onTap: () async {
+                                    Navigator.of(context).pop();
+                                    await controller.pickVideo(ImageSource.camera);
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: tdWhite,
+                      foregroundColor: tdWhite,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(color: tdBlue),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(
+                    ),
+                    child: Obx(() {
+                      final controller = Get.find<CameraSignupController>();
+
+                      if (controller.selectedImagePath.value.isEmpty &&
+                          controller.selectedVideoPath.value.isEmpty) {
+                        return Image.asset(
                           "assets/icon/image-plus.png",
                           width: 100,
                           height: 100,
+                        );
+                      }
+
+                      if (controller.selectedImagePath.value.isNotEmpty) {
+                        return Image.file(
+                          File(controller.selectedImagePath.value),
+                          fit: BoxFit.cover,
+                          width: 100,
+                          height: 100,
+                        );
+                      }
+
+                      if (controller.selectedVideoPath.value.isNotEmpty) {
+                        return VideoPlayerWidget(videoPath: controller.selectedVideoPath.value);
+                      }
+
+                      return const SizedBox.shrink();
+                    }),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: InputText(
+                    labelText: "Full Name",
+                    hintText: "Enter your Full Name",
+                    iconPath: "assets/icon/user.png",
+                    onChanged: (value) => controller.users.value.fullName = value,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: InputText(
+                    labelText: "Email Address",
+                    hintText: "Enter your email address",
+                    iconPath: "assets/icon/mail.png",
+                    onChanged: (value) => controller.users.value.emailAddress = value,
+                    controllerSignup: controller.emailController,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: InputText(
+                    labelText: "Phone Number",
+                    hintText: "Enter your phone number",
+                    iconPath: "assets/icon/phone.png",
+                    onChanged: (value) => controller.users.value.phoneNumber = value,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 30),
+                  child: ButtonNext(),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: ButtonGoogle(
+                    iconPath: "assets/icon/google.png",
+                    labelText: "Sign in with Google",
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 15, bottom: 50),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 5),
+                        child: Text(
+                          "Have an Account?",
+                          style: TextStyle(color: tdGrey),
                         ),
                       ),
-                    ))
+                      Text(
+                        "Sign In",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
               ],
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: InputText(
-                labelText: "Full Name",
-                hintText: "Enter your Full Name",
-                iconPath: "assets/icon/user.png",
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: InputText(
-                labelText: "Email Address",
-                hintText: "Enter your email address",
-                iconPath: "assets/icon/mail.png",
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: InputText(
-                labelText: "Phone Number",
-                hintText: "Enter your phone number",
-                iconPath: "assets/icon/phone.png",
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 30),
-              child: ButtonNext(),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: ButtonGoogle(
-                iconPath: "assets/icon/google.png",
-                labelText: "Sign in with Google",
-                
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 15, bottom: 50),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 5),
-                    child: Text(
-                      "Have an Account?",
-                      style: TextStyle(color: tdGrey),
-                    ),
-                  ),
-                  Text(
-                    "Sign In",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
             ),
           ],
         ),

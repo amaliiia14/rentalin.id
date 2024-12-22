@@ -1,74 +1,49 @@
 import 'dart:io';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/camera_motorcycle_controller.dart';
-import 'package:rentalin_id/app/widgets/VideoPlayerWidget.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/manage_motorcycle_controller.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
+import 'package:rentalin_id/app/widgets/videoPlayerWidget.dart';
 
 import '../controllers/add_motorcyle_controller.dart';
 import '../models/motorcycle.dart';
 
 class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  final box = GetStorage();
-  AddMotorcycleDetailView({super.key});
 
-  Future<bool> _isConnected() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    return connectivityResult != ConnectivityResult.none;
-  }
+  final AudioPlayer audioPlayer = AudioPlayer();
 
-  Future<void> _saveOffline(Map<String, dynamic> data) async {
-    List<dynamic> offlineData = box.read<List<dynamic>>('offlineMotorcycles') ?? [];
-    offlineData.add(data);
-    await box.write('offlineMotorcycles', offlineData);
-    Get.snackbar('Offline', 'Data saved locally. It will sync when online.',
-        snackPosition: SnackPosition.BOTTOM);
+  Future<void> playNotificationSound() async {
+    await audioPlayer.play(AssetSource('audio/notification.mp3'));
   }
-
-  Future<void> _syncData() async {
-    List<dynamic> offlineData = box.read<List<dynamic>>('offlineMotorcycles') ?? [];
-    if (offlineData.isNotEmpty) {
-      for (var data in offlineData) {
-        await firestore.collection("Manage MotorCycle").add(data);
-      }
-      await box.remove('offlineMotorcycles');
-      Get.snackbar('Online', 'Offline data synced to Firestore.',
-          snackPosition: SnackPosition.BOTTOM);
-    }
-  }
-
-  Future<String> _uploadImageToFirebase(File selectedImage) async {
-    // Implement your Firebase image upload logic here and return the image URL
-    // Example: 
-    // final storageRef = FirebaseStorage.instance.ref().child('images/${selectedImage.path.split('/').last}');
-    // await storageRef.putFile(selectedImage);
-    // return await storageRef.getDownloadURL();
-    return "https://example.com/image-url"; // Replace with actual URL
-  }
+  final ManageMotorcycleController _controllerManage = Get.put(ManageMotorcycleController());
 
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => AddMotorcycleController());
+    Get.lazyPut(() => CameraController());
     final Motorcycle motorcycle = Get.arguments;
 
     return Scaffold(
       appBar: AppBar(
-        scrolledUnderElevation: 0,
-        elevation: 0,
-        backgroundColor: tdBg,
-        toolbarHeight: 80,
-        titleSpacing: 0,
-        automaticallyImplyLeading: false,
-        title: const AppBarComponents(
-          nameMenu: 'Add New Motorcycle',
-        ),
-      ),
+          // surfaceTintColor: tdGrey,
+          scrolledUnderElevation: 0,
+          // leadingWidth: 344,
+          elevation: 0,
+          backgroundColor: tdBg,
+          toolbarHeight: 80,
+          titleSpacing: 0,
+          automaticallyImplyLeading: false,
+          title: const AppBarComponents(
+            nameMenu: 'Add New Motorcycle',
+          )),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 23, right: 23),
         child: Column(
@@ -99,14 +74,13 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
             }),
             Container(
               decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.rectangle,
-                border: Border.all(color: tdGrey),
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-              ),
+                  color: Colors.white,
+                  shape: BoxShape.rectangle,
+                  border: Border.all(color: tdGrey),
+                  borderRadius: const BorderRadius.all(Radius.circular(8))),
               width: 345,
               height: 217,
-              margin: const EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: 10),
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,9 +92,7 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                       Text(
                         "Detail Motor",
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
+                            fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                       Text("Merk Motor"),
                       Text("Motor Name"),
@@ -132,13 +104,15 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Text(""),
-                      Text(motorcycle.merkMotor),
-                      Text(motorcycle.motorName),
-                      Text(motorcycle.typeMotor),
-                      Text(motorcycle.platMotor),
+                      const Text(
+                        "",
+                      ),
+                      Text(motorcycle.merkMotor ?? ''),
+                      Text(motorcycle.motorName ?? ''),
+                      Text(motorcycle.typeMotor ?? ''),
+                      Text(motorcycle.platMotor ?? ''),
                     ],
-                  ),
+                  )
                 ],
               ),
             ),
@@ -151,6 +125,7 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                     () => Checkbox(
                       value: controller.motorcycle.value.isRecommended,
                       onChanged: (value) {
+                        // Update the controller's value when the checkbox is toggled
                         controller.motorcycle.value.isRecommended =
                             value ?? false;
                       },
@@ -161,40 +136,43 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
-                labelText: "Price/Day",
-                hintText: "Rp. 150.000",
-                onChanged: (value) {
-                  double? price = double.tryParse(value);
-                  if (price != null) {
-                    controller.motorcycle.value.pricePerDay = price;
-                  }
-                },
-              ),
+                  labelText: "Price/Day",
+                  hintText: "Rp. 150.000",
+                  onChanged: (value) {
+                    double? price = double.tryParse(value);
+                    if (price != null) {
+                      controller.motorcycle.value.pricePerDay = price;
+                    }
+                  }),
             ),
-            const SizedBox(
+            SizedBox(
               height: 20,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceEvenly, // Align buttons evenly
               children: [
+                // "Go Back" button with fixed size
                 SizedBox(
                   width: 163,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
                       Get.back();
+                      // Define what happens when "Go Back" is pressed
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: tdBlue,
-                      backgroundColor: Colors.white,
-                      side: const BorderSide(color: tdBlue),
+                      backgroundColor: Colors.white, // Text color
+                      side: BorderSide(color: tdBlue), // Border color
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius:
+                            BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Go Back',
                       style: TextStyle(
                         color: Colors.blue,
@@ -204,46 +182,33 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                     ),
                   ),
                 ),
+                // "Add New" button with fixed size
                 SizedBox(
                   width: 163,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () async {
-                      Map<String, dynamic> data = {
+                      await _controllerManage.saveData("Manage MotorCycle", {
+                        'Motorcycle ID': motorcycle.motorcycleId,
                         'Merk Motor': motorcycle.merkMotor,
                         'Motor Name': motorcycle.motorName,
+                        'Type Motor': motorcycle.typeMotor,
                         'Plat Motor': motorcycle.platMotor,
                         'Price/Day': motorcycle.pricePerDay,
                         'Recommendation': motorcycle.isRecommended,
-                        'Type Motor': motorcycle.typeMotor,
-                      };
-
-                      final controller = Get.find<CameraController>();
-                      if (controller.selectedImagePath.value.isNotEmpty) {
-                        File selectedImage = File(controller.selectedImagePath.value);
-                        String imageUrl = await _uploadImageToFirebase(selectedImage);
-                        
-                        data['Image URL'] = imageUrl;
-                      }
-
-                      if (await _isConnected()) {
-                        await firestore.collection("Manage MotorCycle").add(data);
-                        await _syncData(); 
-                      } else {
-                        await _saveOffline(data);
-                      }
-
-                      Get.snackbar('Success', 'Motorcycle added successfully!',
-                          snackPosition: SnackPosition.BOTTOM);
+                      });
+                      await playNotificationSound();
+                      // Define what happens when "Add New" is pressed
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: tdgreen,
+                      backgroundColor: tdgreen, // Text color
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius:
+                            BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Add New',
                       style: TextStyle(
                         color: Colors.white,
@@ -254,10 +219,11 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                   ),
                 ),
               ],
-            ),
+            )
           ],
         ),
       ),
     );
+    // TODO: implement build
   }
 }

@@ -16,7 +16,7 @@ class SearchRentView extends GetView<SearchingController>{
     return Scaffold(
     backgroundColor: tdBg,
       body: ListView(
-        children: const [
+        children: [
           SizedBox(
             height: 30,
           ),
@@ -65,8 +65,8 @@ class ScrOpRent extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () { Get.to(const SearchView()); },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xffC7DAFF),
-                    foregroundColor: const Color(0xff1966FF),
+                    backgroundColor: Color(0xffC7DAFF),
+                    foregroundColor: Color(0xff1966FF),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -77,7 +77,7 @@ class ScrOpRent extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 width: 10,
               ),
               SizedBox(
@@ -86,8 +86,8 @@ class ScrOpRent extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () { Get.to(const SearchAvailView());},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xffC7DAFF),
-                    foregroundColor: const Color(0xff1966FF),
+                    backgroundColor: Color(0xffC7DAFF),
+                    foregroundColor: Color(0xff1966FF),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -98,7 +98,7 @@ class ScrOpRent extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 width: 10,
               ),
                SizedBox(
@@ -107,8 +107,8 @@ class ScrOpRent extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () { Get.to(const SearchBookedView());},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:  const Color(0xffC7DAFF),
-                    foregroundColor:  const Color(0xff1966FF),
+                    backgroundColor:  Color(0xffC7DAFF),
+                    foregroundColor:  Color(0xff1966FF),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -119,7 +119,7 @@ class ScrOpRent extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 width: 10,
               ),
                SizedBox(

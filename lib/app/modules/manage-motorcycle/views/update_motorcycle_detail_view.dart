@@ -1,17 +1,30 @@
+import 'package:audioplayers/audioplayers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/add_motorcyle_controller.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/read_motorcycle_controller.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/models/motorcycle.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/views/manage_motorcycle_view.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/button_main.components.dart';
 import 'package:rentalin_id/app/widgets/input_text.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
-class UpdateMotorcycleDetailView extends StatelessWidget {
-  const UpdateMotorcycleDetailView({super.key});
-
+class UpdateMotorcycleDetailView extends GetView<AddMotorcycleController> {
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => AddMotorcycleController());
+
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final Motorcycle motorcycle = Get.arguments;
+    final AudioPlayer audioPlayer = AudioPlayer();
+    Future<void> playNotificationSound() async {
+      await audioPlayer.play(AssetSource('audio/notification.mp3'));
+    }
+
     return Scaffold(
       appBar: AppBar(
           // surfaceTintColor: tdGrey,
@@ -47,9 +60,9 @@ class UpdateMotorcycleDetailView extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(8))),
               width: 345,
               height: 217,
-              margin: const EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: 10),
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
@@ -74,30 +87,31 @@ class UpdateMotorcycleDetailView extends StatelessWidget {
                       Text(
                         "",
                       ),
-                      Text("Honda"),
-                      Text("Nmax 2024"),
-                      Text("Matic"),
-                      Text("KH 2012 WG"),
+                      Text(motorcycle.merkMotor.toString()),
+                      Text(motorcycle.motorName.toString()),
+                      Text(motorcycle.typeMotor.toString()),
+                      Text(motorcycle.platMotor.toString()),
                     ],
                   )
                 ],
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
                 labelText: "Is Recommendation",
-                hintText: "Yes",
+                hintText: "${motorcycle.isRecommended}",
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
-                labelText: "Price/Day",
-                hintText: "Rp. 150.000",
-              ),
+                  labelText: "Price/Day",
+                  hintText: motorcycle.pricePerDay.toString(),
+                  onChanged: (value) => controller
+                      .motorcycle.value.pricePerDay = value as double?),
             ),
-            const SizedBox(
+            SizedBox(
               height: 20,
             ),
             Row(
@@ -116,13 +130,13 @@ class UpdateMotorcycleDetailView extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: tdBlue,
                       backgroundColor: Colors.white, // Text color
-                      side: const BorderSide(color: tdBlue), // Border color
+                      side: BorderSide(color: tdBlue), // Border color
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Go Back',
                       style: TextStyle(
                         color: Colors.blue,
@@ -137,8 +151,20 @@ class UpdateMotorcycleDetailView extends StatelessWidget {
                   width: 163,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Define what happens when "Add New" is pressed
+                    onPressed: () async {
+                      await playNotificationSound();
+                      await firestore
+                          .collection('Manage MotorCycle')
+                          .doc(motorcycle.motorcycleId)
+                          .update({
+                        'Merk Motor': motorcycle.merkMotor,
+                        'Motor Name': motorcycle.motorName,
+                        'Plat Motor': motorcycle.platMotor,
+                        'Price Day': motorcycle.pricePerDay,
+                        'Recommendation': motorcycle.isRecommended,
+                        'Type Motor': motorcycle.typeMotor
+                      });
+                      Get.off(ManageMotorcycleView());
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -148,7 +174,7 @@ class UpdateMotorcycleDetailView extends StatelessWidget {
                             BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Save',
                       style: TextStyle(
                         color: Colors.white,

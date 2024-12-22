@@ -70,7 +70,7 @@ class HistoryPageView extends GetView<HistoryPageController> {
                         Text("PCX 2024"),
                         Text("KH 2021 WG"),
                         Text("17 September 2024"),
-                       
+                      
                       ],
                     )
                   ],

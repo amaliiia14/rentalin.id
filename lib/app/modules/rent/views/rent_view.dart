@@ -26,7 +26,7 @@ class RentView extends GetView<RentController> {
           nameMenu: 'Rent Motorcycle',
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Row(
@@ -59,7 +59,7 @@ class motorP extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(8),
-          image: const DecorationImage(
+          image: DecorationImage(
             image: AssetImage("assets/img/img1.jpg"),
             fit: BoxFit.fill,
           )),
@@ -73,8 +73,8 @@ class motorI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 10),
-      margin: const EdgeInsets.all(10),
+      padding: EdgeInsets.only(left: 10),
+      margin: EdgeInsets.all(10),
       height: 128,
       width: 200,
       decoration: BoxDecoration(
@@ -82,7 +82,7 @@ class motorI extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             8,
           )),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -115,46 +115,49 @@ class Info1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<RentController>();
     return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.fromLTRB(13, 21, 14, 21),
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.fromLTRB(13, 21, 14, 21),
       width: 344,
       height: 480,
       decoration: BoxDecoration(
         color: Colors.white,
+        shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Column(
+      child: const Column(
         children: [
           InputTextNoIcon(
-            controller: controller.fullNameController,
-            labelText: 'Full Name',
-            hintText: 'Enter your full name',
+            labelText: 'Full Name', 
+            hintText: 'Enter your full name'
           ),
-          SizedBox(height: 10),
-          InputTextNoIcon(
-            controller: controller.hometownController,
-            labelText: 'Hometown',
-            hintText: 'Enter your city of origin',
+          SizedBox(
+            height: 10,
           ),
-          SizedBox(height: 10),
           InputTextNoIcon(
-            controller: controller.phone1Controller,
-            labelText: 'No Handphone 1',
-            hintText: 'Enter your No Handphone 1',
+            labelText: 'Hometown', 
+            hintText: 'Enter your city of origin'
           ),
-          SizedBox(height: 10),
-          InputTextNoIcon(
-            controller: controller.phone2Controller,
-            labelText: 'No Handphone 2',
-            hintText: 'Enter your No Handphone 2',
+          SizedBox(
+            height: 10,
           ),
-          SizedBox(height: 10),
           InputTextNoIcon(
-            controller: controller.helmController,
-            labelText: 'Helm',
-            hintText: 'Enter your helm',
+            labelText: 'No Handphone 1', 
+            hintText: 'Enter your No Handphone 1'
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          InputTextNoIcon(
+            labelText: 'No Handphone 2', 
+            hintText: 'Enter your No Handphone 2'
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          InputTextNoIcon(
+            labelText: 'Helm', 
+            hintText: 'Enter your helm'
           ),
         ],
       ),
@@ -166,7 +169,6 @@ class BtnN extends StatelessWidget {
   const BtnN({super.key});
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<RentController>();
     return SizedBox(
       width: 344,
       height: 52,

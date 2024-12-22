@@ -19,6 +19,8 @@ class SearchView extends GetView<SearchingController> {
   const SearchView({super.key});
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => SearchingController());
+    print("rill "+controller.text.value);
     return Scaffold(
         backgroundColor: tdBg,
         body: BottomBar(
@@ -38,6 +40,7 @@ class SearchView extends GetView<SearchingController> {
                     width: 20,
                   ),
                   Scr(),
+                  
                 ],
               ),
               SizedBox(
@@ -59,11 +62,12 @@ class SearchView extends GetView<SearchingController> {
   }
 }
 
-class Scr extends StatelessWidget {
+class Scr extends GetView<SearchingController> {
   const Scr({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => SearchingController());
     return Container(
       alignment: Alignment.center,
       height: 50,
@@ -73,7 +77,13 @@ class Scr extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            if (controller.isListening.value) {
+              controller.stopListening();
+            } else {
+              controller.startListening();
+            }
+          },
           style: ElevatedButton.styleFrom(
             shape: const CircleBorder(),
             padding: const EdgeInsets.all(0),
@@ -82,17 +92,18 @@ class Scr extends StatelessWidget {
             foregroundColor: tdWhite,
           ),
           child: const Icon(
-            Icons.search,
+            Icons.mic,
           )),
     );
   }
 }
 
-class ScrBar extends StatelessWidget {
+class ScrBar extends GetView<SearchingController> {
   const ScrBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => SearchingController());
     return Container(
       height: 50,
       width: 284,
@@ -102,30 +113,38 @@ class ScrBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         // border: Border.all(color: Color(0xff1966FF))
       ),
-      child: const TextField(
-        cursorColor: tdSecBlue,
-        style: TextStyle(color: tdBlue, fontSize: 16),
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: tdSecBlue),
-            borderRadius: BorderRadius.all(Radius.circular(1000)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: tdSecBlue),
-            borderRadius: BorderRadius.all(Radius.circular(1000)),
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: tdSecBlue),
-            borderRadius: BorderRadius.all(Radius.circular(1000)),
-          ),
-          fillColor: tdWhite,
-          hoverColor: tdSecBlue,
-          filled: true,
-          alignLabelWithHint: false,
-          hintText: "Searching",
-          hintStyle: TextStyle(color: tdSecBlue),
-        ),
-      ),
+      child: Obx(() => TextField(
+            controller: TextEditingController(text: controller.text.value)
+              ..selection = TextSelection.fromPosition(
+                TextPosition(offset: controller.text.value.length),
+              ),
+            cursorColor: tdSecBlue,
+            style: const TextStyle(color: tdBlue, fontSize: 16),
+            decoration: const InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: tdSecBlue),
+                borderRadius: BorderRadius.all(Radius.circular(1000)),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: tdSecBlue),
+                borderRadius: BorderRadius.all(Radius.circular(1000)),
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: tdSecBlue),
+                borderRadius: BorderRadius.all(Radius.circular(1000)),
+              ),
+              fillColor: tdWhite,
+              hoverColor: tdSecBlue,
+              contentPadding: EdgeInsets.only(left: 20),
+              filled: true,
+              alignLabelWithHint: false,
+              hintText: "Searching",
+              hintStyle: TextStyle(color: tdSecBlue),
+            ),
+            onChanged: (value) {
+              controller.text.value = value; // Update Rx observable
+            },
+          )),
     );
   }
 }

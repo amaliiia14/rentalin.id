@@ -61,7 +61,7 @@ class CardManageMotorFirebase extends GetView<AddMotorcycleController> {
 
     // var data = snapshot.data!;
 
-  
+   
     // print(controller.motorcycle.value.motorcycleId);
     return InkWell(
       onTap: () {

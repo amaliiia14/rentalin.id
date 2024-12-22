@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 
-class CameraController extends GetxController {
+class CameraSignupController extends GetxController {
   final ImagePicker _picker = ImagePicker(); //object image picker
   final box = GetStorage(); //get storage variable
 
